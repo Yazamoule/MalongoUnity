@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Hud hud = null;
 
     [HideInInspector] public Pause pause = null;
+
+    [HideInInspector] public Player player = null;
     #endregion
 
 
