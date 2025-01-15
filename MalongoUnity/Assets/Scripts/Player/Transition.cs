@@ -7,30 +7,38 @@ public class Transition<TEnum> where TEnum : Enum
 {
     Movement move;
 
-    public HashSet<CorMoveStateEnum> fromCorMove;
-    public HashSet<SpecialMoveStateEnum> fromSpecialMove;
+    public HashSet<CorMoveStateEnum> fromCor = null;
+    public HashSet<SpecialMoveStateEnum> fromSpecial = null;
     //public HashSet<SpecialMoveStateEnum> fromSpecialMove;
     public TEnum to;
     public int priority;
     private Func<bool> OriginalCondition;
 
-    public Transition(IEnumerable<CorMoveStateEnum> fromCore, IEnumerable<SpecialMoveStateEnum> fromSpecialMove, TEnum to, int priority, Func<bool> condition)
+    public Transition(IEnumerable<CorMoveStateEnum> _fromCore, IEnumerable<SpecialMoveStateEnum> _fromSpecial, TEnum _to, int _priority, Func<bool> _condition)
     {
+        //ref of movement to get currentstates at runtime
         move = LevelManager.Instance.player.move;
 
-        fromCorMove = new HashSet<CorMoveStateEnum>(fromCore);
-        this.fromSpecialMove = new HashSet<SpecialMoveStateEnum>(fromSpecialMove);
-        this.to = to;
-        this.priority = priority;
-        OriginalCondition = condition;
+
+        if (_fromCore != null)
+        fromCor = new HashSet<CorMoveStateEnum>(_fromCore);
+
+        if (_fromSpecial != null)
+        fromSpecial = new HashSet<SpecialMoveStateEnum>(_fromSpecial);
+
+        to = _to;
+
+        priority = _priority;
+
+        OriginalCondition = _condition;
     }
 
     public bool Condition()
     {
-        if (!(fromCorMove == null || fromCorMove.Contains(move.corMove.currentStateEnum)))
+        if (!(fromCor == null || fromCor.Contains(move.corMove.currentStateEnum)))
             return false;
         
-        if (!(fromSpecialMove == null || fromSpecialMove.Contains(move.specialMove.currentStateEnum)))
+        if (!(fromSpecial == null || fromSpecial.Contains(move.specialMove.currentStateEnum)))
             return false;
 
         return OriginalCondition();
