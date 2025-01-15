@@ -21,6 +21,10 @@ public class MoveStateMachine<TEnum> where TEnum : Enum
         backStateEnum = currentStateEnum;
         // Initialize IMoveState array
         states = new MoveState<TEnum>[Enum.GetValues(typeof(TEnum)).Length];
+    }
+
+    public void LateInit()
+    {
         currentState = states[Convert.ToInt32(currentStateEnum)];
     }
 
@@ -31,7 +35,8 @@ public class MoveStateMachine<TEnum> where TEnum : Enum
 
     public void ChangeState(TEnum newStateEnum)
     {
-        if (EqualityComparer<TEnum>.Default.Equals(currentStateEnum, newStateEnum)) return;
+        if (EqualityComparer<TEnum>.Default.Equals(currentStateEnum, newStateEnum)) 
+            return;
 
         // Exit the current state
         currentState.Exit();
@@ -51,7 +56,7 @@ public class MoveStateMachine<TEnum> where TEnum : Enum
         {
             if (transition.Condition())
             {
-                ChangeState(transition.To);
+                ChangeState(transition.to);
                 return;
             }
         }

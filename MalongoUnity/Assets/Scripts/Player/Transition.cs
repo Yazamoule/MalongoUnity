@@ -1,19 +1,38 @@
 using System.Collections.Generic;
 using System;
+using static Movement;
+using System.Linq;
 
 public class Transition<TEnum> where TEnum : Enum
 {
-    public HashSet<TEnum> From { get; private set; }
-    public TEnum To { get; private set; }
-    public int Priority { get; private set; }
-    public Func<bool> Condition { get; private set; }
+    Movement move;
 
-    public Transition() { }
-    public Transition(IEnumerable<TEnum> from, TEnum to, int priority, Func<bool> condition)
+    public HashSet<CorMoveStateEnum> fromCorMove;
+    public HashSet<SpecialMoveStateEnum> fromSpecialMove;
+    //public HashSet<SpecialMoveStateEnum> fromSpecialMove;
+    public TEnum to;
+    public int priority;
+    private Func<bool> OriginalCondition;
+
+    public Transition(IEnumerable<CorMoveStateEnum> fromCore, IEnumerable<SpecialMoveStateEnum> fromSpecialMove, TEnum to, int priority, Func<bool> condition)
     {
-        From = new HashSet<TEnum>(from);
-        To = to;
-        Priority = priority;
-        Condition = condition;
+        move = LevelManager.Instance.player.move;
+
+        fromCorMove = new HashSet<CorMoveStateEnum>(fromCore);
+        this.fromSpecialMove = new HashSet<SpecialMoveStateEnum>(fromSpecialMove);
+        this.to = to;
+        this.priority = priority;
+        OriginalCondition = condition;
+    }
+
+    public bool Condition()
+    {
+        if (!(fromCorMove == null || fromCorMove.Contains(move.corMove.currentStateEnum)))
+            return false;
+        
+        if (!(fromSpecialMove == null || fromSpecialMove.Contains(move.specialMove.currentStateEnum)))
+            return false;
+
+        return OriginalCondition();
     }
 }

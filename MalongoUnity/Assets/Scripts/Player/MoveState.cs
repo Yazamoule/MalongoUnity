@@ -10,22 +10,19 @@ public abstract class MoveState<TEnum> : MonoBehaviour where TEnum : Enum
     protected MoveStateMachine<TEnum> stateMachine;
     protected Feet feet;
 
-    public TEnum stateEnum;
+    [HideInInspector] public TEnum stateEnum;
 
     [SerializeField] bool IsCoreMove = true;
 
-    private void Awake()
+    public virtual void Init() 
     {
         gm = GameManager.Instance;
         lm = LevelManager.Instance;
-    }
 
-    private void Start()
-    {
         if (IsCoreMove)
-            stateMachine = lm.player.move.corMov as MoveStateMachine<TEnum>;
+            stateMachine = lm.player.move.corMove as MoveStateMachine<TEnum>;
         else
-            stateMachine = lm.player.move.specialMov as MoveStateMachine<TEnum>;
+            stateMachine = lm.player.move.specialMove as MoveStateMachine<TEnum>;
 
         feet = lm.player.move.feet;
     }

@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
     GameManager gm;
     LevelManager lm;
 
-    public Movement move = null;
+    [HideInInspector] public Movement move = null;
     
 
     private void Awake()
