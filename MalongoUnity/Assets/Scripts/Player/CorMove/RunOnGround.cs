@@ -1,7 +1,7 @@
-using MoveEnum = Movement.CorMoveStateEnum;
-using SpecialEnum = Movement.SpecialMoveStateEnum;
+using MoveEnum = Movement.CoreMoveEnum;
+using SpecialEnum = Movement.SpecialMoveEnum;
 
-public class RunOnGround : MoveState<MoveEnum>
+public class RunOnGround : CoreMoveState
 {
 
     public override void Init()
@@ -17,11 +17,13 @@ public class RunOnGround : MoveState<MoveEnum>
         SpecialEnum[] fromSpecial = null;
         MoveEnum to = MoveEnum.None;
         int priority = -5;
+
         bool IsReadyToRunOnGround()
         {
             return true;
         }
-        Transition<MoveEnum> transition = new Transition<MoveEnum>(fromCore, fromSpecial, to, priority, IsReadyToRunOnGround);
+
+        Transition<MoveEnum> transition = new Transition<MoveEnum>( to, priority, IsReadyToRunOnGround, fromCore, fromSpecial);
         stateMachine.transitions.Add(transition);
     }
 

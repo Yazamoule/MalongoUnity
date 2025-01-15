@@ -1,12 +1,13 @@
-using MoveEnum = Movement.SpecialMoveStateEnum;
+using MoveEnum = Movement.CoreMoveEnum;
+using SpecialEnum = Movement.SpecialMoveEnum;
 
-public class SpecialMoveNone : MoveState<MoveEnum>
+public class SpecialMoveNone : SpecialMoveState
 {
     public override void Init()
     {
         base.Init();
 
-        stateEnum = MoveEnum.None;
+  
         stateMachine.AddState(this);
     }
 

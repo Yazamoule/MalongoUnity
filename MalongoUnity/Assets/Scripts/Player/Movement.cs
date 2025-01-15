@@ -2,43 +2,64 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public enum CorMoveStateEnum
+    public enum CoreMoveEnum
     {
         None,
         RunOnGround,
+
         Max
     }
-    public enum SpecialMoveStateEnum
+    public CoreMoveEnum coreMoveEnum = CoreMoveEnum.None;
+    public CoreMoveEnum backCoreEnum = CoreMoveEnum.None;
+
+    public enum SpecialMoveEnum
     {
         None,
+
         Max
     }
+    public SpecialMoveEnum specialMoveEnum = SpecialMoveEnum.None;
+    public SpecialMoveEnum backSpecialMoveEnum = SpecialMoveEnum.None;
 
-    public MoveStateMachine<CorMoveStateEnum> corMove;
-    public MoveStateMachine<SpecialMoveStateEnum> specialMove;
+    public enum FeetStateEnum
+    {
+        OnGround,
+        ToSteepGround,
+        OffGround,
+
+        Max
+    }
+    public FeetStateEnum feetEnum = FeetStateEnum.OffGround;
+    public FeetStateEnum backFeetEnum = FeetStateEnum.OffGround;
+
+    [HideInInspector] public Rigidbody rb;
+
+    public CoreMoveStateMachine coreMove;
+    public SpecialMoveStateMachine specialMove;
 
     [HideInInspector] public Feet feet = null;
 
     private void Awake()
     {
-        corMove = new MoveStateMachine<CorMoveStateEnum>();
-        specialMove = new MoveStateMachine<SpecialMoveStateEnum>();
-
-        GetComponent<Player>().move = this;
+        GetComponent<Player>().move = this; 
+        rb = GetComponent<Rigidbody>();
 
         feet = GetComponent<Feet>();
+
+        coreMove = new CoreMoveStateMachine();
+        specialMove = new SpecialMoveStateMachine();
     }
 
     private void Start()
     {
         //init all states
-        foreach (var moveState in GetComponents<MoveState<CorMoveStateEnum>>())
+        foreach (var moveState in GetComponents<CoreMoveState>())
         {
             moveState.Init();
         }
-        corMove.LateInit();
+        coreMove.LateInit();
 
-        foreach (var moveState in GetComponents<MoveState<SpecialMoveStateEnum>>())
+        foreach (var moveState in GetComponents<SpecialMoveState>())
         {
             moveState.Init();
         }
@@ -47,6 +68,7 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        corMove.Update();
+        coreMove.Update();
+        specialMove.Update();
     }
 }

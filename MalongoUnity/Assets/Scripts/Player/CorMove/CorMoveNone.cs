@@ -1,6 +1,7 @@
-using MoveEnum = Movement.CorMoveStateEnum;
+using MoveEnum = Movement.CoreMoveEnum;
+using SpecialEnum = Movement.SpecialMoveEnum;
 
-public class CorMoveNone : MoveState<MoveEnum>
+public class CorMoveNone : CoreMoveState
 {
     public override void Init()
     {
@@ -17,6 +18,8 @@ public class CorMoveNone : MoveState<MoveEnum>
     public override void Execute()
     {
         base.Execute();
+
+        //air
     }
 
     public override void Exit()

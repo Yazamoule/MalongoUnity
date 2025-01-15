@@ -196,6 +196,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5431018340431264679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5182391355384632846}
+  m_Layer: 0
+  m_Name: FeetEnd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5182391355384632846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431018340431264679}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.623, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6976593151785016782}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5623041449940317231
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +335,37 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &7588307746041993977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5858622045816731143}
+  m_Layer: 0
+  m_Name: FeetStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5858622045816731143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7588307746041993977}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6976593151785016782}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7750588826194158051
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +402,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7802928553563863976}
+  - {fileID: 5858622045816731143}
+  - {fileID: 5182391355384632846}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7799664928809342571
@@ -367,6 +431,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a6c33ca328c8d4680d96272a5ee03f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundNormal: {x: 1, y: 1, z: 1}
+  currentStep: {x: 0, y: 0, z: 0}
+  maxSlopeAngle: 45
+  springForce: 50
+  springDamp: 50
+  start: {fileID: 5858622045816731143}
+  end: {fileID: 5182391355384632846}
+  rayLayermask:
+    serializedVersion: 2
+    m_Bits: 54
 --- !u!114 &7890012173376881678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +453,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adabe1a8152e83b468687babdf046052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coreMoveEnum: 0
+  backCoreEnum: 0
+  specialMoveEnum: 0
+  backSpecialMoveEnum: 0
+  feetEnum: 2
+  backFeetEnum: 2
+  rb: {fileID: 0}
   feet: {fileID: 0}
 --- !u!114 &7422295207419349003
 MonoBehaviour:
