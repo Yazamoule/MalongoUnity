@@ -22,10 +22,15 @@ public class Hud : MonoBehaviour
     }
     private void Start()
     {
-        lm.scoreManager.OnScoreChange += UpdateScore;
-        lm.scoreManager.OnWin += OnWin;
+        //lm.scoreManager.OnScoreChange += UpdateScore;
+        //lm.scoreManager.OnWin += OnWin;
 
         lm.pause.OnPause += OnPause;
+    }
+
+    private void Update()
+    {
+        UpdateSpeed();
     }
 
     private void OnWin()
@@ -44,5 +49,10 @@ public class Hud : MonoBehaviour
     private void UpdateScore(float _score)
     {
         scoreText.text = "score: " + Mathf.Ceil(_score).ToString();
+    }
+
+    void UpdateSpeed()
+    {
+        scoreText.text = Mathf.FloorToInt(new Vector3(lm.player.move.rb.linearVelocity.x, 0, lm.player.move.rb.linearVelocity.z).magnitude).ToString();
     }
 }

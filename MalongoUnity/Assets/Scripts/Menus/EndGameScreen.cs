@@ -25,10 +25,10 @@ public class EndGameScreen : MonoBehaviour
 
     private void OnWin()
     {
-        ToggleVictoryScrean(lm.scoreManager.Score, true);
+        ToggleVictoryScrean(true, lm.scoreManager.Score);
     }
 
-    private void ToggleVictoryScrean(float _score, bool _toggle)
+    private void ToggleVictoryScrean(bool _toggle, float _score = 0)
     {
         if (_toggle)
         {
@@ -57,6 +57,11 @@ public class EndGameScreen : MonoBehaviour
     public void Retry()
     {
         gm.LoadScene("Lvl");
+    }
+
+    public void Continue()
+    {
+        ToggleVictoryScrean(false);
     }
 
 

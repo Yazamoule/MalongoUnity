@@ -11,12 +11,12 @@ public class SpecialMoveStateMachine
     SpecialMoveState[] states;
     SpecialMoveState currentState = null;
 
-    public List<Transition<Movement.CoreMoveEnum>> transitions = new List<Transition<Movement.CoreMoveEnum>>();
+    public List<Transition<Movement.SpecialEnum>> transitions = new List<Transition<Movement.SpecialEnum>>();
 
     public SpecialMoveStateMachine()
     {
         // Initialize IMoveState array
-        states = new SpecialMoveState[(int)Movement.SpecialMoveEnum.Max];
+        states = new SpecialMoveState[(int)Movement.SpecialEnum.Max];
     }
 
     public void LateInit()
@@ -30,17 +30,17 @@ public class SpecialMoveStateMachine
         states[(int)_state.stateEnum] = _state;
     }
 
-    public void ChangeState(Movement.CoreMoveEnum newStateEnum)
+    public void ChangeState(Movement.SpecialEnum newStateEnum)
     {
         // Exit the current state
         currentState.Exit();
 
         // Update state enums
-        move.backCoreEnum = move.coreMoveEnum;
-        move.coreMoveEnum = newStateEnum;
+        move.backSpecialMoveEnum = move.specialMoveEnum;
+        move.specialMoveEnum = newStateEnum;
 
         // Enter the new state
-        currentState = states[(int)move.coreMoveEnum];
+        currentState = states[(int)move.specialMoveEnum];
         currentState.Enter();
     }
 

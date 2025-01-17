@@ -11,12 +11,12 @@ public class CoreMoveStateMachine
     CoreMoveState[] states;
     CoreMoveState currentState = null;
 
-    public List<Transition<Movement.CoreMoveEnum>> transitions = new List<Transition<Movement.CoreMoveEnum>>();
+    public List<Transition<Movement.CoreEnum>> transitions = new List<Transition<Movement.CoreEnum>>();
 
     public CoreMoveStateMachine()
     {
         // Initialize IMoveState array
-        states = new CoreMoveState[(int)Movement.CoreMoveEnum.Max];
+        states = new CoreMoveState[(int)Movement.CoreEnum.Max];
     }
 
     public void LateInit()
@@ -30,7 +30,7 @@ public class CoreMoveStateMachine
         states[(int)_state.stateEnum] = _state;
     }
 
-    public void ChangeState(Movement.CoreMoveEnum newStateEnum)
+    public void ChangeState(Movement.CoreEnum newStateEnum)
     {
         // Exit the current state
         currentState.Exit();

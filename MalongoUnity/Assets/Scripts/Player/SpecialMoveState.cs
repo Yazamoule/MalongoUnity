@@ -2,23 +2,26 @@ using UnityEngine;
 
 public abstract class SpecialMoveState : MonoBehaviour
 {
-    GameManager gm;
-    LevelManager lm;
+    protected GameManager gm;
+    protected LevelManager lm;
 
     protected SpecialMoveStateMachine stateMachine;
     protected Feet feet;
+    protected Movement move;
 
-    [HideInInspector] public Movement.SpecialMoveEnum stateEnum;
 
-    public virtual void Init() 
+    [HideInInspector] public Movement.SpecialEnum stateEnum;
+
+    public virtual void Init()
     {
         gm = GameManager.Instance;
         lm = LevelManager.Instance;
 
-        stateMachine = lm.player.move.specialMove;
+        move = lm.player.move;
+        stateMachine = move.specialMove;
         feet = lm.player.move.feet;
     }
-    public virtual void Enter(){}
-    public virtual void Execute(){}
-    public virtual void Exit(){}
+    public virtual void Enter() { }
+    public virtual void Execute() { }
+    public virtual void Exit() { }
 }

@@ -6,24 +6,24 @@ public class Transition<TEnum> where TEnum : Enum
 {
     Movement move;
 
-    public HashSet<CoreMoveEnum> fromCor = null;
-    public HashSet<SpecialMoveEnum> fromSpecial = null;
-    //public HashSet<SpecialMoveStateEnum> fromFeet = null;
+    public HashSet<CoreEnum> fromCor = null;
+    public HashSet<SpecialEnum> fromSpecial = null;
+    public HashSet<FeetEnum> fromFeet = null;
     public TEnum to;
     public int priority;
     private Func<bool> OriginalCondition;
 
-    public Transition(TEnum _to, int _priority, Func<bool> _condition, IEnumerable<CoreMoveEnum> _fromCore = null, IEnumerable<SpecialMoveEnum> _fromSpecial = null)
+    public Transition(TEnum _to, int _priority, Func<bool> _condition, IEnumerable<CoreEnum> _fromCore = null, IEnumerable<SpecialEnum> _fromSpecial = null)
     {
         //ref of movement to get currentstates at runtime
         move = LevelManager.Instance.player.move;
 
 
         if (_fromCore != null)
-        fromCor = new HashSet<CoreMoveEnum>(_fromCore);
+        fromCor = new HashSet<CoreEnum>(_fromCore);
 
         if (_fromSpecial != null)
-        fromSpecial = new HashSet<SpecialMoveEnum>(_fromSpecial);
+        fromSpecial = new HashSet<SpecialEnum>(_fromSpecial);
 
         to = _to;
 

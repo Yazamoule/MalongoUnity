@@ -7,8 +7,9 @@ public abstract class CoreMoveState : MonoBehaviour
 
     protected CoreMoveStateMachine stateMachine;
     protected Feet feet;
+    protected Movement move;
 
-    [HideInInspector] public Movement.CoreMoveEnum stateEnum;
+    [HideInInspector] public Movement.CoreEnum stateEnum;
 
     public virtual void Init() 
     {
@@ -16,7 +17,8 @@ public abstract class CoreMoveState : MonoBehaviour
         lm = LevelManager.Instance;
 
         stateMachine = lm.player.move.coreMove;
-        feet = lm.player.move.feet;
+        move = lm.player.move;
+        feet = move.feet;
     }
     public virtual void Enter(){}
     public virtual void Execute(){}

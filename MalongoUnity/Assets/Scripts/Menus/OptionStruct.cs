@@ -8,4 +8,7 @@ public struct OptionStruct
 
     //player name used for hight Score
     public string playerName;
+
+    public float mouseSensitivity;
+
 }

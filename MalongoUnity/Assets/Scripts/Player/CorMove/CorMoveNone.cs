@@ -1,5 +1,5 @@
-using MoveEnum = Movement.CoreMoveEnum;
-using SpecialEnum = Movement.SpecialMoveEnum;
+using MoveEnum = Movement.CoreEnum;
+using SpecialEnum = Movement.SpecialEnum;
 
 public class CorMoveNone : CoreMoveState
 {

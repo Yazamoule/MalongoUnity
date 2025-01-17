@@ -1,4 +1,4 @@
-using FeetEnum = Movement.FeetStateEnum;
+using FeetEnum = Movement.FeetEnum;
 
 using UnityEditor.Overlays;
 using UnityEngine;
@@ -40,6 +40,12 @@ public class Feet : MonoBehaviour
         length = start.position.y - end.position.y;
     }
 
+    public void CustomUpdate()
+    {
+        CheckGround();
+        AddGroundForce();
+    }
+
     public void CheckGround()
     {
         //set the last Feet enum
@@ -49,7 +55,7 @@ public class Feet : MonoBehaviour
 
         Ray ray = new Ray(start.position, Vector3.down);
         RaycastHit hit = new RaycastHit();
-        Debug.DrawRay(start.position, end.position, Color.red);
+        Debug.DrawRay(start.position, Vector3.down, Color.red, length);
 
         if (Physics.Raycast(ray, out hit, length, rayLayermask, QueryTriggerInteraction.Ignore))
         {
@@ -97,15 +103,15 @@ public class Feet : MonoBehaviour
 
         //force = (4.1f * Mathf.Pow(force - 0.5f, 3) + 0.5462f) * 0.9f;
 
-        force = force * springForce * Time.deltaTime;
+        force = force * springForce * Time.fixedDeltaTime;
         //add vertical friction so you dont bounce
-        force = force - move.rb.linearVelocity.y * springDamp * Time.deltaTime;
+        force = force - move.rb.linearVelocity.y * springDamp * Time.fixedDeltaTime;
         //aply the feet force to stay above ground
 
-        move.rb.AddForce(Vector3.up * force, ForceMode.VelocityChange);
+        move.rb.linearVelocity += Vector3.up * force;
 
         // Draw debug lines
-        Debug.DrawLine(transform.position, transform.position + groundNormal * 25, Color.green, 2.0f);
+        Debug.DrawLine(transform.position, transform.position + groundNormal, Color.green, 2.0f);
     }
 
     public void Slide()
