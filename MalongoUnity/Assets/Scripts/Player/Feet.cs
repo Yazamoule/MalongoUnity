@@ -114,9 +114,9 @@ public class Feet : MonoBehaviour
         move.rb.linearVelocity += Vector3.up * (force + damp);
 
         // Draw debug lines
-        //gm.debug.DrawRay(Vector3.up * damp, 1, Color.red, "Feet Force");
-        //gm.debug.DrawRay(Vector3.up * force, 1, Color.red, "Feet Force");
-        //gm.debug.DrawRay(groundNormal, 1f, Color.grey, "ground Normal");
+        gm.DebugLine(Vector3.up * damp, 1, Color.red, "Feet Force");
+        gm.DebugLine(Vector3.up * force, 1, Color.red, "Feet Force");
+        gm.DebugLine(groundNormal, 1f, Color.grey, "ground Normal");
     }
 
     public void Slide()

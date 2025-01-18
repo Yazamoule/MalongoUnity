@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using FMODUnity;
-using System.IO;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -203,4 +203,18 @@ public class GameManager : MonoBehaviour
         blackImage.color = color;
     }
     #endregion
+
+    #region Debug
+    public void DebugLine(string _label, Color _color, Vector3 _vector, Vector3? _start = null, bool _drawWorld = true, bool _drawHUi = true)
+    {
+#if UNITY_EDITOR
+        if (debug != null)
+        {
+            debug.DrawRay(_label, _color, _vector, _start, _drawWorld, _drawHUi);
+        }
+#endif
+    }
+    #endregion
+
+
 }

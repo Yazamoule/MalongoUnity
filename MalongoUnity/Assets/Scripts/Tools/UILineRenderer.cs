@@ -8,7 +8,7 @@ namespace Radishmouse
     {
         public Vector2[] points;
 
-        public float thickness = 10f;
+        public float thickness = 1f;
         public bool center = true;
 
         protected override void Awake()

@@ -19,16 +19,17 @@ public class DebugCustom : MonoBehaviour
         public Vector3 start = Vector3.zero;
         public Vector3 vector = Vector3.zero;
 
-        public RectTransform textTransform = null;
+        public TextMeshProUGUI text = null;
 
         public UILineRenderer uILineRenderer = null;
 
 
-        public RayCustom(string _label, Color _color, float _scale)
+        public RayCustom(string _label, Color _color, bool _drawWorld, bool _drawUiHorizontal)
         {
             label = _label;
             color = _color;
-            scale = _scale;
+            drawWorld = _drawWorld;
+            drawUiHorizontal = _drawUiHorizontal;
         }
     }
 
@@ -40,8 +41,11 @@ public class DebugCustom : MonoBehaviour
     [SerializeField] GameObject vectorUiToInstenciate = null;
 
     [SerializeField] Vector2 uiVectorStart = new Vector2(1000, 1000);
+    [SerializeField] Vector2 labelOffset = new Vector2(-30, -30);
 
-        [SerializeField] float uiScale = 50f;
+    [SerializeField] float uiScale = 50f;
+
+
     Canvas canva;
 
     Transform defaultStartPos = null;
@@ -62,21 +66,29 @@ public class DebugCustom : MonoBehaviour
 
     }
 
-    public void DrawRay(string _label, Color _color, Vector3 _start, Vector3 _vector, float _scale = 1f)
+    public void OnDestroy()
+    {
+        GameManager.Instance.debug = null;
+    }
+
+    public void DrawRay(string _label, Color _color, Vector3 _vector, Vector3? _start, bool _drawWorld = true, bool _drawHorizontalUi = true)
     {
         RayCustom ray;
         if (!uiRays.TryGetValue(_label, out ray))
         {
             GameObject uiVector = Instantiate(vectorUiToInstenciate, canva.transform);
 
-            ray = new RayCustom(_label, _color, _scale);
-            ray.textTransform = uiVector.GetComponentInChildren<RectTransform>();
+            ray = new RayCustom(_label, _color, _drawWorld, _drawHorizontalUi);
+
             ray.uILineRenderer = uiVector.GetComponent<UILineRenderer>();
             ray.uILineRenderer.points[0] = uiVectorStart;
             ray.uILineRenderer.color = _color;
 
-            uiRays.Add(_label, ray);
+            ray.text = uiVector.GetComponentInChildren<TextMeshProUGUI>();
+            ray.text.color = _color;
+            ray.text.text = _label;
 
+            uiRays.Add(_label, ray);
         }
 
         ray.vector = _vector;
@@ -85,8 +97,18 @@ public class DebugCustom : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateVectorWorld();
-        UpdateVectorUi();
+        if (!drawAll)
+            return;
+
+        if (drawRay)
+        {
+            UpdateVectorWorld();
+        }
+
+        if (drawHorizontal)
+        {
+            UpdateVectorUi();
+        }
     }
 
     void UpdateVectorWorld()
@@ -94,6 +116,10 @@ public class DebugCustom : MonoBehaviour
         foreach (KeyValuePair<string, RayCustom> pair in uiRays)
         {
             RayCustom ray = pair.Value;
+            
+            if (!ray.drawWorld)
+                continue;
+            
             Debug.DrawLine(ray.start, ray.start + ray.vector, ray.color, 1f);
         }
     }
@@ -104,15 +130,17 @@ public class DebugCustom : MonoBehaviour
         {
             RayCustom ray = pair.Value;
 
-            Vector2 lineEnd = uiVectorStart + uiScale * new Vector2(ray.vector.y, - Mathf.Sqrt(ray.vector.x * ray.vector.x + ray.vector.z * ray.vector.z)) ;
+            if(!ray.drawUiHorizontal)
+                continue;
 
+            Vector2 lineEnd = uiVectorStart + uiScale * new Vector2(Mathf.Sqrt(ray.vector.x * ray.vector.x + ray.vector.z * ray.vector.z), ray.vector.y);
 
 
             ray.uILineRenderer.points[1] = lineEnd;
             ray.uILineRenderer.ForceUpdateMesh();
 
 
-            //ray.textTransform.localPosition = lineEnd;
+            ray.text.rectTransform.localPosition = lineEnd + labelOffset;
 
             //ray.uiLineTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, ray.vector.magnitude * 100);
             //ray.uiLineTransform.rotation = Quaternion.FromToRotation(Vector3.right, ray.vector);

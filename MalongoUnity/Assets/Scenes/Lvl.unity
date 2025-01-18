@@ -1189,10 +1189,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DebugUi
       objectReference: {fileID: 0}
-    - target: {fileID: 3320814351293738258, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7622490800476386335, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1274,21 +1270,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
-      propertyPath: uiScale
-      value: 20
+      propertyPath: labelOffset.x
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
+      propertyPath: labelOffset.y
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
       propertyPath: uiVectorStart.x
-      value: 0
+      value: -800
       objectReference: {fileID: 0}
     - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
       propertyPath: uiVectorStart.y
-      value: 700
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
-      propertyPath: vectorUiToInstenciate
-      value: 
-      objectReference: {fileID: 7350759454294941330, guid: 7dd8ccc8d342c0a41bcc227f6e86f7b5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
