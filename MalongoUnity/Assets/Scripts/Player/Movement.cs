@@ -103,8 +103,11 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Calculate WishDir Zero or a normalized vectorl
-        wishDir = playerFoward.rotation * new Vector3(inputTranslation.x, 0, inputTranslation.y);
+        wishDir = feet.RotateToLocalWorld(new Vector3(inputTranslation.x, 0, inputTranslation.y), false);
+        wishDir = feet.RotateToLocalWorld(new Vector3(inputTranslation.x, 0, inputTranslation.y), true);
+
+        //gm.debug.DrawRay("wishDir", Color.red, playerFoward.position, wishDir);
+        gm.debug.DrawRay("Velocity", Color.blue, playerFoward.position, rb.linearVelocity);
 
         feet.CustomUpdate();
         coreMove.Update();

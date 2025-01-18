@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        AddScore(10 * Time.deltaTime);
+
     }
 
     private void WinCondition(float _score)

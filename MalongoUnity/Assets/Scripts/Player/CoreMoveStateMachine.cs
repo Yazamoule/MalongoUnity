@@ -36,7 +36,6 @@ public class CoreMoveStateMachine
         currentState.Exit();
 
         // Update state enums
-        move.backCoreEnum = move.coreMoveEnum;
         move.coreMoveEnum = newStateEnum;
 
         // Enter the new state
@@ -60,8 +59,9 @@ public class CoreMoveStateMachine
 
     public void Update()
     {
-        ProcessTransition();
+        move.backCoreEnum = move.coreMoveEnum;
 
+        ProcessTransition();
         currentState.Execute();
     }
 }

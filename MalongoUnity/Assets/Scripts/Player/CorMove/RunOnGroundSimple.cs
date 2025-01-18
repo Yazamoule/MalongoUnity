@@ -50,20 +50,24 @@ public class RunOnGroundSimple : CoreMoveState
 
     private void Accelerate()
     {
-        Vector3 velocity = move.rb.linearVelocity + move.wishDir * acceleration * Time.fixedDeltaTime;
+        Vector3 accel = (feet.groundRQuat * move.wishDir) * acceleration * Time.fixedDeltaTime;
+        Vector3 velocity = move.rb.linearVelocity + accel;
+
+        //DebugCustom.DrawRay(accel, 5, Color.blue);
 
         if (velocity.sqrMagnitude > maxSpeed * maxSpeed)
         {
             //Clamp velocity
             velocity = velocity.normalized * maxSpeed;
-        } 
+        }
 
         move.rb.linearVelocity = velocity;
     }
 
     private void Decelerate()
     {
-        move.rb.linearVelocity += move.rb.linearVelocity * -resistence * Time.fixedDeltaTime;
+        Vector3 horizontalVelocity = feet.OverrideVerticalAxis(move.rb.linearVelocity - feet.verticalSpringSpeed * Vector3.up, true);
+        move.rb.linearVelocity += horizontalVelocity * -resistence * Time.fixedDeltaTime;
     }
 
     public override void Exit()

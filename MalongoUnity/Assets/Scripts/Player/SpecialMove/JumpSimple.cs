@@ -25,7 +25,7 @@ public class JumpSimple : SpecialMoveState
             bool Condition()
             {
                 if (move.feetEnum == FeetEnum.OnGround && iWantToJump)
-                    return true;
+                     return true;
 
                 //reset i want to jump
                 iWantToJump = false;

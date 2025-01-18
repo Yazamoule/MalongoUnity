@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public LeaderboardManager leaderboardManager = null;
 
     [HideInInspector] public SaveLoad saveLoad;
+
+    [HideInInspector] public DebugCustom debug;
     #endregion
 
     [SerializeField] GameObject inputGameObject = null;

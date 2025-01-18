@@ -36,7 +36,6 @@ public class SpecialMoveStateMachine
         currentState.Exit();
 
         // Update state enums
-        move.backSpecialMoveEnum = move.specialMoveEnum;
         move.specialMoveEnum = newStateEnum;
 
         // Enter the new state
@@ -59,6 +58,8 @@ public class SpecialMoveStateMachine
 
     public void Update()
     {
+        move.backSpecialMoveEnum = move.specialMoveEnum;
+
         ProcessTransition();
 
         currentState.Execute();

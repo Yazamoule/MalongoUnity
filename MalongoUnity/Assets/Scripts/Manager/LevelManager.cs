@@ -58,5 +58,16 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public void DrawVector(Vector3 _vector, float _scale, Color _color)
+    {
 
+    }
+
+    public void DrawVector(Vector3 _start, Vector3 _vector, float _scale, Color _color)
+    { 
+    }
+
+    public void DrawPersistentText()
+    {
+    }
 }
