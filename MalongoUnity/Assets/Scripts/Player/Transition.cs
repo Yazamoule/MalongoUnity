@@ -13,7 +13,7 @@ public class Transition<TEnum> where TEnum : Enum
     public int priority;
     private Func<bool> OriginalCondition;
 
-    public Transition(TEnum _to, int _priority, Func<bool> _condition, IEnumerable<CoreEnum> _fromCore = null, IEnumerable<SpecialEnum> _fromSpecial = null)
+    public Transition(TEnum _to, int _priority, Func<bool> _condition, IEnumerable<CoreEnum> _fromCore = null, IEnumerable<SpecialEnum> _fromSpecial = null, IEnumerable<FeetEnum> _fromFeet = null)
     {
         //ref of movement to get currentstates at runtime
         move = LevelManager.Instance.player.move;
@@ -24,6 +24,10 @@ public class Transition<TEnum> where TEnum : Enum
 
         if (_fromSpecial != null)
         fromSpecial = new HashSet<SpecialEnum>(_fromSpecial);
+
+        if (_fromFeet != null)
+            fromFeet = new HashSet<FeetEnum>(_fromFeet);
+
 
         to = _to;
 
@@ -38,6 +42,9 @@ public class Transition<TEnum> where TEnum : Enum
             return false;
         
         if (!(fromSpecial == null || fromSpecial.Contains(move.specialMoveEnum)))
+            return false;
+
+        if (!(fromFeet == null || fromFeet.Contains(move.feetEnum)))
             return false;
 
         return OriginalCondition();

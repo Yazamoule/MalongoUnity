@@ -74,7 +74,6 @@ public class RunOnGroundSimple : CoreMoveState
         gm.DebugLine("Vertical Velocity", Color.yellow ,feet.verticalSpringSpeed * Vector3.up * 0.1f);
         gm.DebugLine("Velocity", Color.blue ,move.rb.linearVelocity * 0.1f);
 
-
         gm.DebugLine("Decelerate", Color.cyan, horizontalVelocity * -resistence * 0.1f);
     }
 

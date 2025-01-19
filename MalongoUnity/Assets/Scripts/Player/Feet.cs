@@ -89,6 +89,7 @@ public class Feet : MonoBehaviour
             groundNormal = Vector3.up;
             groundRQuat = Quaternion.identity;
             groundDist = 1000f;
+            verticalSpringSpeed = 0f;
             move.feetEnum = FeetEnum.OffGround;
         }
 
@@ -99,7 +100,9 @@ public class Feet : MonoBehaviour
     public void AddGroundForce()
     {
         if (move.feetEnum == FeetEnum.OffGround)
+        {
             return;
+        }
         
 
 
