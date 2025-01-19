@@ -16,6 +16,8 @@ public class DebugCustom : MonoBehaviour
         public bool drawWorld = true;
         public bool drawUiHorizontal = true;
 
+        public bool updatedThisFrame = false;
+
         public Vector3 start = Vector3.zero;
         public Vector3 vector = Vector3.zero;
 
@@ -38,6 +40,8 @@ public class DebugCustom : MonoBehaviour
     public bool drawHorizontal = true;
     public bool drawText = true;
 
+    [SerializeField, UnityEngine.Range(-0.1f, 2f)] float timeScale = -0.1f;
+
     [SerializeField] GameObject vectorUiToInstenciate = null;
 
     [SerializeField] Vector2 uiVectorStart = new Vector2(1000, 1000);
@@ -45,10 +49,19 @@ public class DebugCustom : MonoBehaviour
 
     [SerializeField] float uiScale = 50f;
 
+    [SerializeField] float worldRayLife = 2;
 
     Canvas canva;
 
     Transform defaultStartPos = null;
+
+    bool flagFixedUpdate = false;
+    bool flagUpdate = false;
+
+    [SerializeField] float drawCooldown = 0.5f;
+    float drawTimer = 0f;
+
+
 
     Dictionary<string, RayCustom> uiRays = new Dictionary<string, RayCustom>();
 
@@ -62,8 +75,6 @@ public class DebugCustom : MonoBehaviour
     public void Start()
     {
         defaultStartPos = LevelManager.Instance.player.move.playerFoward;
-
-
     }
 
     public void OnDestroy()
@@ -76,74 +87,130 @@ public class DebugCustom : MonoBehaviour
         RayCustom ray;
         if (!uiRays.TryGetValue(_label, out ray))
         {
-            GameObject uiVector = Instantiate(vectorUiToInstenciate, canva.transform);
 
             ray = new RayCustom(_label, _color, _drawWorld, _drawHorizontalUi);
 
-            ray.uILineRenderer = uiVector.GetComponent<UILineRenderer>();
-            ray.uILineRenderer.points[0] = uiVectorStart;
-            ray.uILineRenderer.color = _color;
+            if (ray.drawUiHorizontal)
+            {
+                GameObject uiVector = Instantiate(vectorUiToInstenciate, canva.transform);
 
-            ray.text = uiVector.GetComponentInChildren<TextMeshProUGUI>();
-            ray.text.color = _color;
-            ray.text.text = _label;
+                ray.uILineRenderer = uiVector.GetComponent<UILineRenderer>();
+                ray.uILineRenderer.points[0] = uiVectorStart;
+                ray.uILineRenderer.color = _color;
+
+                ray.text = uiVector.GetComponentInChildren<TextMeshProUGUI>();
+                ray.text.color = _color;
+                ray.text.text = _label;
+            }
 
             uiRays.Add(_label, ray);
         }
 
+        ray.updatedThisFrame = true;
+
         ray.vector = _vector;
-        ray.start = _start;
+        ray.start = _start ?? defaultStartPos.position;
+
+    }
+
+    private void Update()
+    {
+        if (timeScale > 0)
+        {
+            Time.timeScale = timeScale;
+        }
+
+
+
+
+        if (flagFixedUpdate == true)
+        {
+            flagFixedUpdate = false;
+            Draw();
+        }
+        else
+        {
+            flagUpdate = true;
+        }
+
+
     }
 
     private void FixedUpdate()
     {
+        drawTimer += Time.fixedDeltaTime;
+
+        if (flagUpdate == true)
+        {
+            flagUpdate = false;
+            Draw();
+        }
+        else
+        {
+            flagFixedUpdate = true;
+        }
+    }
+
+    void Draw()
+    {
         if (!drawAll)
             return;
 
-        if (drawRay)
+        bool cooldownDrawRayOk = false;
+        if (drawCooldown < drawTimer)
         {
-            UpdateVectorWorld();
+            drawTimer -= drawCooldown;
+            cooldownDrawRayOk = true;
         }
 
-        if (drawHorizontal)
-        {
-            UpdateVectorUi();
-        }
-    }
-
-    void UpdateVectorWorld()
-    {
-        foreach (KeyValuePair<string, RayCustom> pair in uiRays)
-        {
-            RayCustom ray = pair.Value;
-            
-            if (!ray.drawWorld)
-                continue;
-            
-            Debug.DrawLine(ray.start, ray.start + ray.vector, ray.color, 1f);
-        }
-    }
-
-    void UpdateVectorUi()
-    {
         foreach (KeyValuePair<string, RayCustom> pair in uiRays)
         {
             RayCustom ray = pair.Value;
 
-            if(!ray.drawUiHorizontal)
-                continue;
+            if (drawRay && cooldownDrawRayOk)
+            {
+                UpdateVectorWorld(ray);
+            }
 
-            Vector2 lineEnd = uiVectorStart + uiScale * new Vector2(Mathf.Sqrt(ray.vector.x * ray.vector.x + ray.vector.z * ray.vector.z), ray.vector.y);
+            if (drawHorizontal)
+                UpdateVectorUi(ray);
 
-
-            ray.uILineRenderer.points[1] = lineEnd;
-            ray.uILineRenderer.ForceUpdateMesh();
-
-
-            ray.text.rectTransform.localPosition = lineEnd + labelOffset;
-
-            //ray.uiLineTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, ray.vector.magnitude * 100);
-            //ray.uiLineTransform.rotation = Quaternion.FromToRotation(Vector3.right, ray.vector);
+            ray.updatedThisFrame = false;
         }
+    }
+
+    void UpdateVectorWorld(RayCustom _ray)
+    {
+        if (!_ray.updatedThisFrame || !_ray.drawWorld)
+            return;
+
+        Debug.DrawLine(_ray.start, _ray.start + _ray.vector, _ray.color, worldRayLife);
+
+    }
+
+    void UpdateVectorUi(RayCustom _ray)
+    {
+        if (!_ray.drawUiHorizontal)
+            return;
+
+        if (!_ray.updatedThisFrame)
+        {
+            _ray.uILineRenderer.enabled = false;
+            _ray.text.enabled = false;
+            //_ray.uILineRenderer.color.WithAlpha(0f);
+            return;
+        }
+        _ray.uILineRenderer.enabled = true;
+        _ray.text.enabled = true;
+        //_ray.uILineRenderer.color.WithAlpha(1f);
+
+        Vector2 lineEnd = uiVectorStart + uiScale * new Vector2(Mathf.Sqrt(_ray.vector.x * _ray.vector.x + _ray.vector.z * _ray.vector.z), _ray.vector.y);
+
+        _ray.uILineRenderer.points[1] = lineEnd;
+
+        _ray.uILineRenderer.ForceUpdateMesh();
+
+        _ray.text.rectTransform.localPosition = lineEnd + labelOffset;
+
     }
 }

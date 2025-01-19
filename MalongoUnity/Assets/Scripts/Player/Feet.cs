@@ -66,17 +66,23 @@ public class Feet : MonoBehaviour
 
             currentStep = hit.point;
 
+            Color debugLineColor;  
+
             float angle = Vector3.Angle(groundNormal, Vector3.up);
             groundDist = hit.distance;
 
             if (angle > maxSlopeAngle)
             {
                 move.feetEnum = FeetEnum.ToSteepGround;
+                debugLineColor = Color.white;
             }
             else
             {
                 move.feetEnum = FeetEnum.OnGround;
+                debugLineColor = Color.black;
             }
+            
+            gm.DebugLine("Ground Normal", debugLineColor, groundNormal, hit.point, true, false);
         }
         else
         {
@@ -85,6 +91,8 @@ public class Feet : MonoBehaviour
             groundDist = 1000f;
             move.feetEnum = FeetEnum.OffGround;
         }
+
+
     }
 
 
@@ -97,11 +105,11 @@ public class Feet : MonoBehaviour
 
         if (move.backFeetEnum == FeetEnum.OffGround)
         {
-            verticalSpringSpeed = Time.deltaTime * (lastGroundDist - groundDist);
+            verticalSpringSpeed = move.rb.linearVelocity.y;
         }
         else
         {
-            verticalSpringSpeed = move.rb.linearVelocity.y;
+            verticalSpringSpeed = (lastGroundDist - groundDist) / Time.fixedDeltaTime;
         }
 
         float force = 1 - (groundDist / length);
@@ -114,9 +122,8 @@ public class Feet : MonoBehaviour
         move.rb.linearVelocity += Vector3.up * (force + damp);
 
         // Draw debug lines
-        gm.DebugLine(Vector3.up * damp, 1, Color.red, "Feet Force");
-        gm.DebugLine(Vector3.up * force, 1, Color.red, "Feet Force");
-        gm.DebugLine(groundNormal, 1f, Color.grey, "ground Normal");
+        //gm.DebugLine("Feet Damp", Color.red, Vector3.up * 50 * damp);
+        //gm.DebugLine("Feet Force", Color.yellow, Vector3.up * 50 * force);
     }
 
     public void Slide()
@@ -155,6 +162,7 @@ public class Feet : MonoBehaviour
     {
         if (_acountForSlope)
         {
+            gm.DebugLine("yesTEmp", Color.grey, Vector3.Scale(Vector3.forward, groundRQuat * new Vector3(1f, 0f, 1f)) + new Vector3(0f, _y, 0f));
             return Vector3.Scale(_input, groundRQuat * new Vector3(1f, 0f, 1f)) + new Vector3(0f, _y, 0f);
         }
 

@@ -69,7 +69,7 @@ MonoBehaviour:
   points:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  thickness: 10
+  thickness: 1
   center: 1
 --- !u!1 &7864112444070548732
 GameObject:

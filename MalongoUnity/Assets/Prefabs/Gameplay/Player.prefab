@@ -199,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 5431018340431264679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.623, z: 0}
+  m_LocalPosition: {x: 0, y: -2.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -485,7 +485,7 @@ Transform:
   m_GameObject: {fileID: 7588307746041993977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0.328, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -561,10 +561,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundNormal: {x: 1, y: 1, z: 1}
+  groundRQuat: {x: 0, y: 0, z: 0, w: 1}
   currentStep: {x: 0, y: 0, z: 0}
   maxSlopeAngle: 45
-  springForce: 154.8
-  springDamp: 50
+  springForce: 1.27
+  springDamp: 0.5
+  groundDist: 0
+  verticalSpringSpeed: 0
   start: {fileID: 5858622045816731143}
   end: {fileID: 5182391355384632846}
   rayLayermask:
@@ -591,7 +594,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   playerFoward: {fileID: 8525643108983910796}
   cameraAnchor: {fileID: 9085218409667634789}
-  lookSensitivity: 3.33
+  lookSensitivity: 0.0352
   yawLimit: 85
   feet: {fileID: 0}
   inputTranslation: {x: 0, y: 0}

@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
         coreMove = new CoreMoveStateMachine();
         specialMove = new SpecialMoveStateMachine();
 
-        lookAction = gm.input.actions.FindAction("Look");
+        gm.input.actions.FindAction("Look").performed += OnInputLook;
         moveAction = gm.input.actions.FindAction("Move");
     }
 
@@ -95,7 +95,6 @@ public class Movement : MonoBehaviour
     {
         //read the Input
         inputTranslation = moveAction.ReadValue<Vector2>().normalized;
-        inputRotation = lookAction.ReadValue<Vector2>();
         
         //RotatteCamera
         Look();
@@ -104,10 +103,9 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         wishDir = feet.RotateToLocalWorld(new Vector3(inputTranslation.x, 0, inputTranslation.y), false);
-        wishDir = feet.RotateToLocalWorld(new Vector3(inputTranslation.x, 0, inputTranslation.y), true);
 
-        gm.DebugLine("wishDir", Color.red, playerFoward.position, wishDir);
-        gm.DebugLine("Velocity", Color.blue, playerFoward.position, rb.linearVelocity);
+        //gm.DebugLine("wishDir", Color.magenta, wishDir, true, false);
+        //gm.DebugLine("Velocity", Color.blue, rb.linearVelocity * 0.5f);
 
         feet.CustomUpdate();
         coreMove.Update();
@@ -117,11 +115,13 @@ public class Movement : MonoBehaviour
     void Look()
     {
         // Get input and scale it by sensitivity and frame time
-        float mouseX = inputRotation.x * lookSensitivity * Time.deltaTime; // Yaw
-        float mouseY = inputRotation.y * lookSensitivity * Time.deltaTime; // Pitch
+        float mouseX = inputRotation.x * lookSensitivity; // Yaw
+        float mouseY = inputRotation.y * lookSensitivity; // Pitch
+        //reset after use
+        inputRotation = Vector2.zero;
 
         // Rotate the yaw (horizontal) using Transform.forward
-        transform.Rotate(Vector3.up * mouseX); // Rotate the player (or main object) horizontally
+        playerFoward.Rotate(Vector3.up * mouseX); // Rotate the player (or main object) horizontally
 
         // Adjust pitch (vertical rotation) on the cameraAnchor
         float currentPitch = cameraAnchor.localEulerAngles.x;
@@ -133,8 +133,7 @@ public class Movement : MonoBehaviour
 
     public void OnInputLook(InputAction.CallbackContext _context)
     {
-        inputRotation = _context.ReadValue<Vector2>();
-
+        inputRotation += _context.ReadValue<Vector2>();
     }
 
 }

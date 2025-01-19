@@ -50,10 +50,8 @@ public class RunOnGroundSimple : CoreMoveState
 
     private void Accelerate()
     {
-        Vector3 accel = (feet.groundRQuat * move.wishDir) * acceleration * Time.fixedDeltaTime;
-        Vector3 velocity = move.rb.linearVelocity + accel;
-
-        //DebugCustom.DrawRay(accel, 5, Color.blue);
+        Vector3 accel = (feet.groundRQuat * move.wishDir) * acceleration ;
+        Vector3 velocity = move.rb.linearVelocity + accel * Time.fixedDeltaTime;
 
         if (velocity.sqrMagnitude > maxSpeed * maxSpeed)
         {
@@ -61,13 +59,23 @@ public class RunOnGroundSimple : CoreMoveState
             velocity = velocity.normalized * maxSpeed;
         }
 
+
+        gm.DebugLine("Accel", Color.green, accel * 0.1f);
+        
         move.rb.linearVelocity = velocity;
     }
 
     private void Decelerate()
     {
-        Vector3 horizontalVelocity = feet.OverrideVerticalAxis(move.rb.linearVelocity - feet.verticalSpringSpeed * Vector3.up, true);
+        Vector3 horizontalVelocity = move.rb.linearVelocity - feet.verticalSpringSpeed * Vector3.up;
         move.rb.linearVelocity += horizontalVelocity * -resistence * Time.fixedDeltaTime;
+
+        gm.DebugLine("Horizontal Velocity", Color.red ,horizontalVelocity * 0.1f);
+        gm.DebugLine("Vertical Velocity", Color.yellow ,feet.verticalSpringSpeed * Vector3.up * 0.1f);
+        gm.DebugLine("Velocity", Color.blue ,move.rb.linearVelocity * 0.1f);
+
+
+        gm.DebugLine("Decelerate", Color.cyan, horizontalVelocity * -resistence * 0.1f);
     }
 
     public override void Exit()

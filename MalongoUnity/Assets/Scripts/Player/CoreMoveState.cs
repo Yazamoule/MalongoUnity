@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class CoreMoveState : MonoBehaviour
 {
-    GameManager gm;
-    LevelManager lm;
+    protected GameManager gm;
+    protected LevelManager lm;
 
     protected CoreMoveStateMachine stateMachine;
     protected Feet feet;
