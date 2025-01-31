@@ -32,7 +32,7 @@ public class JumpSimple : SpecialMoveState
                 return false;
             }
 
-            Transition<SpecialEnum> transition = new Transition<SpecialEnum>(to, priority, Condition, fromCore, fromSpecial);
+            Transition<SpecialEnum> transition = new Transition<SpecialEnum>(to, priority, Condition, null, fromCore, fromSpecial);
             stateMachine.transitions.Add(transition);
         }
         {   //Exit Jump from any
@@ -46,7 +46,7 @@ public class JumpSimple : SpecialMoveState
                 return true;
             }
 
-            Transition<SpecialEnum> transition = new Transition<SpecialEnum>(to, priority, Condition, fromCore, fromSpecial);
+            Transition<SpecialEnum> transition = new Transition<SpecialEnum>(to, priority, Condition, null, fromCore, fromSpecial);
             stateMachine.transitions.Add(transition);
         }
         #endregion

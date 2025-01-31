@@ -31,7 +31,7 @@ public class RunOnGroundSimple : CoreMoveState
             return false;
         }
 
-        Transition<MoveEnum> transition = new Transition<MoveEnum>(to, priority, Condition, fromCore, fromSpecial);
+        Transition<MoveEnum> transition = new Transition<MoveEnum>(to, priority, Condition, null, fromCore, fromSpecial);
         stateMachine.transitions.Add(transition);
     }
 

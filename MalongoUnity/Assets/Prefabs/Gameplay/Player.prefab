@@ -505,6 +505,7 @@ GameObject:
   - component: {fileID: 7890012173376881678}
   - component: {fileID: 7422295207419349003}
   - component: {fileID: 1402860525062061794}
+  - component: {fileID: 7791937478416290886}
   - component: {fileID: 807534156643681126}
   - component: {fileID: 3373546370695655720}
   - component: {fileID: 5773208007185893835}
@@ -629,6 +630,21 @@ MonoBehaviour:
   acceleration: 14.6
   resistence: 1.02
   maxSpeed: 16
+--- !u!114 &7791937478416290886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7750588826194158051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85aa57817dcef6641b7db6957007aa8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateEnum: 0
+  speedMax: 100
+  accelMax: 10
 --- !u!114 &807534156643681126
 MonoBehaviour:
   m_ObjectHideFlags: 0

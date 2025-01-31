@@ -13,7 +13,7 @@ public class Transition<TEnum> where TEnum : Enum
     public int priority;
     private Func<bool> OriginalCondition;
 
-    public Transition(TEnum _to, int _priority, Func<bool> _condition, IEnumerable<CoreEnum> _fromCore = null, IEnumerable<SpecialEnum> _fromSpecial = null, IEnumerable<FeetEnum> _fromFeet = null)
+    public Transition(TEnum _to, int _priority, Func<bool> _condition, IEnumerable<FeetEnum> _fromFeet = null, IEnumerable<CoreEnum> _fromCore = null, IEnumerable<SpecialEnum> _fromSpecial = null)
     {
         //ref of movement to get currentstates at runtime
         move = LevelManager.Instance.player.move;

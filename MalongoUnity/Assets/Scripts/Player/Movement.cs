@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     {
         None,
         RunOnGround,
+        RunInAir,
 
         Max
     }
