@@ -14,16 +14,19 @@ public class DebugCustom : MonoBehaviour
         public float scale = 1f;
         public Color color = Color.white;
         public bool drawWorld = true;
-        public bool drawUiHorizontal = true;
+        public bool drawUiSideView = true;
+        public bool drawUiTopView = true;
 
         public bool updatedThisFrame = false;
 
         public Vector3 start = Vector3.zero;
         public Vector3 vector = Vector3.zero;
 
-        public TextMeshProUGUI text = null;
+        public TextMeshProUGUI textSideView = null;
+        public TextMeshProUGUI textTopView = null;
 
-        public UILineRenderer uILineRenderer = null;
+        public UILineRenderer uiSideViewLineRenderer = null;
+        public UILineRenderer uiTopViewLineRenderer = null;
 
 
         public RayCustom(string _label, Color _color, bool _drawWorld, bool _drawUiHorizontal)
@@ -31,25 +34,28 @@ public class DebugCustom : MonoBehaviour
             label = _label;
             color = _color;
             drawWorld = _drawWorld;
-            drawUiHorizontal = _drawUiHorizontal;
+            drawUiSideView = _drawUiHorizontal;
         }
     }
 
     public bool drawAll = true;
     public bool drawRay = true;
-    public bool drawHorizontal = true;
+    public bool drawSideView = true;
+    public bool drawTopView = true;
     public bool drawText = true;
 
     [SerializeField, UnityEngine.Range(-0.1f, 2f)] float timeScale = -0.1f;
 
     [SerializeField] GameObject vectorUiToInstenciate = null;
 
-    [SerializeField] Vector2 uiVectorStart = new Vector2(1000, 1000);
     [SerializeField] Vector2 labelOffset = new Vector2(-30, -30);
 
     [SerializeField] float uiScale = 50f;
 
     [SerializeField] float worldRayLife = 2;
+
+    [SerializeField] Vector2 uiSideViewVectorStart = new Vector2(1000, 1000);
+    [SerializeField] Vector2 uiTopViewVectorStart = new Vector2(0, 0);
 
     Canvas canva;
 
@@ -90,17 +96,30 @@ public class DebugCustom : MonoBehaviour
 
             ray = new RayCustom(_label, _color, _drawWorld, _drawHorizontalUi);
 
-            if (ray.drawUiHorizontal)
+            if (ray.drawUiSideView)
             {
                 GameObject uiVector = Instantiate(vectorUiToInstenciate, canva.transform);
 
-                ray.uILineRenderer = uiVector.GetComponent<UILineRenderer>();
-                ray.uILineRenderer.points[0] = uiVectorStart;
-                ray.uILineRenderer.color = _color;
+                ray.uiSideViewLineRenderer = uiVector.GetComponent<UILineRenderer>();
+                ray.uiSideViewLineRenderer.points[0] = uiSideViewVectorStart;
+                ray.uiSideViewLineRenderer.color = _color;
 
-                ray.text = uiVector.GetComponentInChildren<TextMeshProUGUI>();
-                ray.text.color = _color;
-                ray.text.text = _label;
+                ray.textSideView = uiVector.GetComponentInChildren<TextMeshProUGUI>();
+                ray.textSideView.color = _color;
+                ray.textSideView.text = _label;
+            }
+
+            if (ray.drawUiTopView)
+            {
+                GameObject uiVector = Instantiate(vectorUiToInstenciate, canva.transform);
+
+                ray.uiTopViewLineRenderer = uiVector.GetComponent<UILineRenderer>();
+                ray.uiTopViewLineRenderer.points[0] = uiTopViewVectorStart;
+                ray.uiTopViewLineRenderer.color = _color;
+
+                ray.textTopView = uiVector.GetComponentInChildren<TextMeshProUGUI>();
+                ray.textTopView.color = _color;
+                ray.textTopView.text = _label;
             }
 
             uiRays.Add(_label, ray);
@@ -172,8 +191,11 @@ public class DebugCustom : MonoBehaviour
                 UpdateVectorWorld(ray);
             }
 
-            if (drawHorizontal)
-                UpdateVectorUi(ray);
+            if (drawSideView)
+                UpdateUiSideView(ray);
+
+            if (drawTopView)
+                UpdateUiTopView(ray);
 
             ray.updatedThisFrame = false;
         }
@@ -188,29 +210,52 @@ public class DebugCustom : MonoBehaviour
 
     }
 
-    void UpdateVectorUi(RayCustom _ray)
+    void UpdateUiSideView(RayCustom _ray)
     {
-        if (!_ray.drawUiHorizontal)
+        if (!_ray.drawUiSideView)
             return;
 
         if (!_ray.updatedThisFrame)
         {
-            _ray.uILineRenderer.enabled = false;
-            _ray.text.enabled = false;
-            //_ray.uILineRenderer.color.WithAlpha(0f);
+            _ray.uiSideViewLineRenderer.enabled = false;
+            _ray.textSideView.enabled = false;
             return;
         }
-        _ray.uILineRenderer.enabled = true;
-        _ray.text.enabled = true;
-        //_ray.uILineRenderer.color.WithAlpha(1f);
+        _ray.uiSideViewLineRenderer.enabled = true;
+        _ray.textSideView.enabled = true;
 
-        Vector2 lineEnd = uiVectorStart + uiScale * new Vector2(Mathf.Sqrt(_ray.vector.x * _ray.vector.x + _ray.vector.z * _ray.vector.z), _ray.vector.y);
+        Vector2 lineEnd = uiSideViewVectorStart + uiScale * new Vector2(Mathf.Sqrt(_ray.vector.x * _ray.vector.x + _ray.vector.z * _ray.vector.z), _ray.vector.y);
 
-        _ray.uILineRenderer.points[1] = lineEnd;
+        _ray.uiSideViewLineRenderer.points[1] = lineEnd;
 
-        _ray.uILineRenderer.ForceUpdateMesh();
+        _ray.uiSideViewLineRenderer.ForceUpdateMesh();
 
-        _ray.text.rectTransform.localPosition = lineEnd + labelOffset;
+        _ray.textSideView.rectTransform.localPosition = lineEnd + labelOffset;
+
+    }
+
+
+    void UpdateUiTopView(RayCustom _ray)
+    {
+        if (!_ray.drawUiTopView)
+            return;
+
+        if (!_ray.updatedThisFrame)
+        {
+            _ray.uiTopViewLineRenderer.enabled = false;
+            _ray.textTopView.enabled = false;
+            return;
+        }
+        _ray.uiTopViewLineRenderer.enabled = true;
+        _ray.textTopView.enabled = true;
+
+        Vector2 lineEnd = uiTopViewVectorStart + uiScale * new Vector2(_ray.vector.x, _ray.vector.z);
+
+        _ray.uiTopViewLineRenderer.points[1] = lineEnd;
+
+        _ray.uiTopViewLineRenderer.ForceUpdateMesh();
+
+        _ray.textTopView.rectTransform.localPosition = lineEnd + labelOffset;
 
     }
 }

@@ -4180,6 +4180,22 @@ PrefabInstance:
       propertyPath: uiVectorStart.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
+      propertyPath: uiTopViewVectorStart.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
+      propertyPath: uiTopViewVectorStart.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
+      propertyPath: uiSideViewVectorStart.x
+      value: -803.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754144638904288599, guid: 2103066871fc08c46b2e750f06d142e8, type: 3}
+      propertyPath: uiSideViewVectorStart.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
