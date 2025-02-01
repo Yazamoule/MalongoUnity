@@ -96,23 +96,23 @@ public class MoveOnGroundQuake : CoreMoveState
 
         float sqrSpeed = velocity.sqrMagnitude;
 
-        //if (sqrSpeed < 0.01)
-        //    return;
+        if (sqrSpeed < 0.0001)
+            return;
 
         //dynamic friction and static friction, 2 in 1 good.
         //calculate the friction on a higher value if you go too slow
-        //float capedHSpeed = sqrSpeed < frictionCap * frictionCap ? frictionCap : Mathf.Sqrt(sqrSpeed);
+        float capedHSpeed = sqrSpeed < frictionCap * frictionCap ? frictionCap : Mathf.Sqrt(sqrSpeed);
 
         gm.DebugLine(true, "capedHSpeed", Color.blue, velocity * 0.3f);
 
 
         //attention complicate try to think
-        Vector3 frictionVector = velocity.normalized * Mathf.Sqrt(sqrSpeed) * -friction;
+        Vector3 frictionVector = velocity.normalized * capedHSpeed * -friction * Time.fixedDeltaTime * 60;
 
         //static friction wen the friciton is to strong just stop
-        //if ((frictionVector.sqrMagnitude > sqrSpeed))
-        //    frictionVector = - feet.OverrideVerticalAxis(move.rb.linearVelocity, false, 0);
-     
+        if ((frictionVector.sqrMagnitude > sqrSpeed))
+            frictionVector = -velocity;
+
         move.rb.linearVelocity += frictionVector;
 
         gm.DebugLine(true, "friction", Color.cyan, frictionVector * 3f);

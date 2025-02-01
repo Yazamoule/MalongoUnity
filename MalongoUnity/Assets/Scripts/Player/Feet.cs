@@ -124,7 +124,7 @@ public class Feet : MonoBehaviour
         //force = (4.1f * Mathf.Pow(force - 0.5f, 3) + 0.5462f) * 0.9f;
 
         force = force * springForce * Time.fixedDeltaTime;
-        float damp = -verticalSpringSpeed * springDamp;
+        float damp = -verticalSpringSpeed * springDamp * Time.fixedDeltaTime * 60;
 
         move.rb.linearVelocity += Vector3.up * (force + damp);
 
