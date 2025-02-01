@@ -33,23 +33,6 @@ public class MoveInAirQuake : CoreMoveState
             Transition<CoreEnum> transition = new Transition<CoreEnum>(to, priority, Condition, fromFeet, fromCore, fromSpecial);
             stateMachine.transitions.Add(transition);
         }
-
-        {
-            //createing Transition To Exit Run in air
-            FeetEnum[] fromFeet = new[] { FeetEnum.OnGround};
-            CoreEnum[] fromCore = null;
-            SpecialEnum[] fromSpecial = null;
-            CoreEnum to = CoreEnum.RunOnGround;
-            int priority = 0;
-
-            bool Condition()
-            {
-                return true;
-            }
-
-            Transition<CoreEnum> transition = new Transition<CoreEnum>(to, priority, Condition, fromFeet, fromCore, fromSpecial);
-            stateMachine.transitions.Add(transition);
-        }
     }
 
     public override void Enter()
@@ -86,7 +69,7 @@ public class MoveInAirQuake : CoreMoveState
 
         move.rb.linearVelocity += addSpeedVector;
 
-        gm.DebugLine("AirMoveAccel", Color.green, addSpeedVector * 0.1f);
+        gm.DebugLine(false, "AirMoveAccel", Color.green, addSpeedVector * 3f);
     }
 
     //private void Decelerate()

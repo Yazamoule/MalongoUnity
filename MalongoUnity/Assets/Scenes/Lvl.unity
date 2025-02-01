@@ -4472,8 +4472,56 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: groundDist
+      value: 0.7822304
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: springDamp
+      value: -9.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
       propertyPath: springForce
-      value: 20
+      value: 13.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: currentStep.x
+      value: 51.847214
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: currentStep.y
+      value: 12.184666
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: currentStep.z
+      value: -4.001709
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: groundRQuat.w
+      value: 0.9859089
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: groundRQuat.x
+      value: -0.074811235
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: groundRQuat.z
+      value: 0.14962247
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: groundNormal.x
+      value: -0.29502827
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: groundNormal.y
+      value: 0.9440328
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: groundNormal.z
+      value: -0.14751413
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878132137120729849, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: verticalSpringSpeed
+      value: -0.15144354
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

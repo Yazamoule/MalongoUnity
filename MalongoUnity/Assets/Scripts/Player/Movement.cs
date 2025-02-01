@@ -105,8 +105,8 @@ public class Movement : MonoBehaviour
     {
         wishDir = feet.RotateToLocalWorld(new Vector3(inputTranslation.x, 0, inputTranslation.y), false);
 
-        //gm.DebugLine("wishDir", Color.magenta, wishDir, true, false);
-        //gm.DebugLine("Velocity", Color.blue, rb.linearVelocity * 0.5f);
+        gm.DebugLine(false, "wishDir", Color.magenta, wishDir);
+        gm.DebugLine(false, "Velocity", Color.blue, rb.linearVelocity * 0.3f);
 
         feet.CustomUpdate();
         coreMove.Update();

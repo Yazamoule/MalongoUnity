@@ -59,8 +59,7 @@ public class RunOnGroundSimple : CoreMoveState
             velocity = velocity.normalized * maxSpeed;
         }
 
-
-        gm.DebugLine("Accel", Color.green, accel * 0.1f);
+        gm.DebugLine(false, "Accel", Color.green, accel * 0.1f);
         
         move.rb.linearVelocity = velocity;
     }
@@ -70,11 +69,11 @@ public class RunOnGroundSimple : CoreMoveState
         Vector3 horizontalVelocity = move.rb.linearVelocity - feet.verticalSpringSpeed * Vector3.up;
         move.rb.linearVelocity += horizontalVelocity * -resistence * Time.fixedDeltaTime;
 
-        gm.DebugLine("Horizontal Velocity", Color.red ,horizontalVelocity * 0.1f);
-        gm.DebugLine("Vertical Velocity", Color.yellow ,feet.verticalSpringSpeed * Vector3.up * 0.1f);
-        gm.DebugLine("Velocity", Color.blue ,move.rb.linearVelocity * 0.1f);
+        gm.DebugLine(false, "Horizontal Velocity", Color.red ,horizontalVelocity * 0.1f);
+        gm.DebugLine(false, "Vertical Velocity", Color.yellow ,feet.verticalSpringSpeed * Vector3.up * 0.1f);
+        gm.DebugLine(false, "Velocity", Color.blue ,move.rb.linearVelocity * 0.1f);
 
-        gm.DebugLine("Decelerate", Color.cyan, horizontalVelocity * -resistence * 0.1f);
+        gm.DebugLine(false, "Decelerate", Color.cyan, horizontalVelocity * -resistence * 0.1f);
     }
 
     public override void Exit()

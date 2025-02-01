@@ -29,12 +29,13 @@ public class DebugCustom : MonoBehaviour
         public UILineRenderer uiTopViewLineRenderer = null;
 
 
-        public RayCustom(string _label, Color _color, bool _drawWorld, bool _drawUiHorizontal)
+        public RayCustom(string _label, Color _color, bool _drawWorld, bool _drawSideView, bool _rawTopView)
         {
             label = _label;
             color = _color;
             drawWorld = _drawWorld;
-            drawUiSideView = _drawUiHorizontal;
+            drawUiSideView = _drawSideView;
+            drawUiTopView = _rawTopView;
         }
     }
 
@@ -88,13 +89,13 @@ public class DebugCustom : MonoBehaviour
         GameManager.Instance.debug = null;
     }
 
-    public void DrawRay(string _label, Color _color, Vector3 _vector, Vector3? _start, bool _drawWorld = true, bool _drawHorizontalUi = true)
+    public void DrawRay(string _label, Color _color, Vector3 _vector, Vector3? _start, bool _drawWorld = true, bool _drawSideView = true, bool _drawTopView = true)
     {
         RayCustom ray;
         if (!uiRays.TryGetValue(_label, out ray))
         {
 
-            ray = new RayCustom(_label, _color, _drawWorld, _drawHorizontalUi);
+            ray = new RayCustom(_label, _color, _drawWorld, _drawSideView, _drawTopView);
 
             if (ray.drawUiSideView)
             {

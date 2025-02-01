@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using FMODUnity;
+using Unity.VisualScripting;
 
 
 public class GameManager : MonoBehaviour
@@ -205,12 +206,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Debug
-    public void DebugLine(string _label, Color _color, Vector3 _vector, Vector3? _start = null, bool _drawWorld = true, bool _drawHUi = true)
+    public void DebugLine(bool _enabled, string _label, Color _color, Vector3 _vector, bool _drawWorld = true, bool _drawSideView = true, bool _drawTopView = true, Vector3 ? _start = null)
     {
 #if UNITY_EDITOR
-        if (debug != null)
+        if (debug != null && _enabled)
         {
-            debug.DrawRay(_label, _color, _vector, _start, _drawWorld, _drawHUi);
+            debug.DrawRay(_label, _color, _vector, _start, _drawWorld, _drawSideView, _drawTopView);
         }
 #endif
     }

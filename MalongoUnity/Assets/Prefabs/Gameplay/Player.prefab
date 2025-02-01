@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 8878132137120729849}
   - component: {fileID: 7890012173376881678}
   - component: {fileID: 7422295207419349003}
-  - component: {fileID: 1402860525062061794}
+  - component: {fileID: 6679403055295925485}
   - component: {fileID: 7791937478416290886}
   - component: {fileID: 807534156643681126}
   - component: {fileID: 3373546370695655720}
@@ -561,14 +561,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a6c33ca328c8d4680d96272a5ee03f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundNormal: {x: 1, y: 1, z: 1}
+  groundNormal: {x: 0, y: 1, z: 2.220446e-17}
   groundRQuat: {x: 0, y: 0, z: 0, w: 1}
-  currentStep: {x: 0, y: 0, z: 0}
+  currentStep: {x: 136.72543, y: -1.8376551e-15, z: 82.76063}
   maxSlopeAngle: 45
-  springForce: 1.27
-  springDamp: 0.5
-  groundDist: 0
-  verticalSpringSpeed: 0
+  springForce: 15.2
+  springDamp: -1.94
+  groundDist: 0.5636573
+  verticalSpringSpeed: -1.3853794
   start: {fileID: 5858622045816731143}
   end: {fileID: 5182391355384632846}
   rayLayermask:
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateEnum: 0
---- !u!114 &1402860525062061794
+--- !u!114 &6679403055295925485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -623,13 +623,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7750588826194158051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: addd906a0aef3b34cb46b756398ce402, type: 3}
+  m_Script: {fileID: 11500000, guid: a2db8c672794bf141b57b677861754fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateEnum: 0
-  acceleration: 14.6
-  resistence: 1.02
-  maxSpeed: 16
+  stateEnum: 1
+  speedMax: 10.54
+  accelMax: 27.8
+  frictionCap: 3
+  friction: 3
 --- !u!114 &7791937478416290886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,8 +644,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateEnum: 0
-  speedMax: 100
-  accelMax: 10
+  speedMax: 10
+  accelMax: 30
 --- !u!114 &807534156643681126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,7 +672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateEnum: 0
-  force: 100
+  force: 6.04
 --- !u!54 &5773208007185893835
 Rigidbody:
   m_ObjectHideFlags: 0

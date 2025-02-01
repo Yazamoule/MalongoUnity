@@ -18,7 +18,7 @@ public class Feet : MonoBehaviour
     [SerializeField] float springDamp = 50;
 
     [SerializeField] private float groundDist = 0f;
-    private float lastGroundDist = 0f; 
+    private float lastGroundDist = 0f;
 
     public float verticalSpringSpeed = 0f;
 
@@ -27,7 +27,7 @@ public class Feet : MonoBehaviour
     float length = 0f;
     [SerializeField] LayerMask rayLayermask;
 
-        
+
     private void Awake()
     {
         gm = GameManager.Instance;
@@ -45,6 +45,13 @@ public class Feet : MonoBehaviour
     {
         CheckGround();
         AddGroundForce();
+
+
+        gm.DebugLine(true, "rotated Foward", Color.white, Quaternion.Inverse(groundRQuat) * (groundRQuat * Vector3.forward));
+        gm.DebugLine(true, "OverrideVerticalAxis foward", Color.red, OverrideVerticalAxis(Vector3.forward, true));
+        gm.DebugLine(true, "OverrideVerticalAxis one", Color.blue, OverrideVerticalAxis(Vector3.one, true));
+        gm.DebugLine(true, "OverrideVerticalAxis Velocity", Color.magenta, OverrideVerticalAxis(move.rb.linearVelocity, true));
+        gm.DebugLine(true, "Velocity", Color.yellow, move.rb.linearVelocity);
     }
 
     public void CheckGround()
@@ -57,7 +64,7 @@ public class Feet : MonoBehaviour
         Ray ray = new Ray(start.position, Vector3.down);
         RaycastHit hit = new RaycastHit();
 
-      
+
 
         if (Physics.Raycast(ray, out hit, length, rayLayermask, QueryTriggerInteraction.Ignore))
         {
@@ -66,7 +73,7 @@ public class Feet : MonoBehaviour
 
             currentStep = hit.point;
 
-            Color debugLineColor;  
+            Color debugLineColor;
 
             float angle = Vector3.Angle(groundNormal, Vector3.up);
             groundDist = hit.distance;
@@ -81,8 +88,8 @@ public class Feet : MonoBehaviour
                 move.feetEnum = FeetEnum.OnGround;
                 debugLineColor = Color.black;
             }
-            
-            gm.DebugLine("Ground Normal", debugLineColor, groundNormal, hit.point, true, false);
+
+            gm.DebugLine(true, "Ground Normal", debugLineColor, groundNormal, true, false, false, hit.point);
         }
         else
         {
@@ -103,7 +110,7 @@ public class Feet : MonoBehaviour
         {
             return;
         }
-        
+
 
 
         if (move.backFeetEnum == FeetEnum.OffGround)
@@ -113,6 +120,8 @@ public class Feet : MonoBehaviour
         else
         {
             verticalSpringSpeed = (lastGroundDist - groundDist) / Time.fixedDeltaTime;
+
+            gm.DebugLine(false, "Feet Speed", Color.yellow, Vector3.up * 0.3f * verticalSpringSpeed);
         }
 
         float force = 1 - (groundDist / length);
@@ -120,7 +129,7 @@ public class Feet : MonoBehaviour
         //force = (4.1f * Mathf.Pow(force - 0.5f, 3) + 0.5462f) * 0.9f;
 
         force = force * springForce * Time.fixedDeltaTime;
-        float damp = - verticalSpringSpeed * springDamp * Time.fixedDeltaTime;
+        float damp = -verticalSpringSpeed * springDamp * Time.fixedDeltaTime;
 
         move.rb.linearVelocity += Vector3.up * (force + damp);
 
@@ -165,8 +174,7 @@ public class Feet : MonoBehaviour
     {
         if (_acountForSlope)
         {
-            gm.DebugLine("yesTEmp", Color.grey, Vector3.Scale(Vector3.forward, groundRQuat * new Vector3(1f, 0f, 1f)) + new Vector3(0f, _y, 0f));
-            return Vector3.Scale(_input, groundRQuat * new Vector3(1f, 0f, 1f)) + new Vector3(0f, _y, 0f);
+            return (groundRQuat * Vector3.Scale(_input, Quaternion.Inverse(groundRQuat) * new Vector3(1f, 0f, 1f))) + new Vector3(0f, _y, 0f);
         }
 
         return Vector3.Scale(_input, new Vector3(1f, 0f, 1f)) + new Vector3(0f, _y, 0f);
