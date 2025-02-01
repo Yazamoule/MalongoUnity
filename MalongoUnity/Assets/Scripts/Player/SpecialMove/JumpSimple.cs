@@ -43,6 +43,9 @@ public class JumpSimple : SpecialMoveState
 
             bool Condition()
             {
+                if (to == move.specialMoveEnum)
+                    return false;
+
                 return true;
             }
 

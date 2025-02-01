@@ -47,11 +47,6 @@ public class Feet : MonoBehaviour
         AddGroundForce();
 
 
-        gm.DebugLine(true, "rotated Foward", Color.white, Quaternion.Inverse(groundRQuat) * (groundRQuat * Vector3.forward));
-        gm.DebugLine(true, "OverrideVerticalAxis foward", Color.red, OverrideVerticalAxis(Vector3.forward, true));
-        gm.DebugLine(true, "OverrideVerticalAxis one", Color.blue, OverrideVerticalAxis(Vector3.one, true));
-        gm.DebugLine(true, "OverrideVerticalAxis Velocity", Color.magenta, OverrideVerticalAxis(move.rb.linearVelocity, true));
-        gm.DebugLine(true, "Velocity", Color.yellow, move.rb.linearVelocity);
     }
 
     public void CheckGround()
@@ -89,7 +84,7 @@ public class Feet : MonoBehaviour
                 debugLineColor = Color.black;
             }
 
-            gm.DebugLine(true, "Ground Normal", debugLineColor, groundNormal, true, false, false, hit.point);
+            gm.DebugLine(false, "Ground Normal", debugLineColor, groundNormal * 0.1f, true, true, true);
         }
         else
         {
@@ -119,7 +114,7 @@ public class Feet : MonoBehaviour
         }
         else
         {
-            verticalSpringSpeed = (lastGroundDist - groundDist) / Time.fixedDeltaTime;
+            verticalSpringSpeed = (groundDist - lastGroundDist) / Time.fixedDeltaTime;
 
             gm.DebugLine(false, "Feet Speed", Color.yellow, Vector3.up * 0.3f * verticalSpringSpeed);
         }
@@ -129,13 +124,16 @@ public class Feet : MonoBehaviour
         //force = (4.1f * Mathf.Pow(force - 0.5f, 3) + 0.5462f) * 0.9f;
 
         force = force * springForce * Time.fixedDeltaTime;
-        float damp = -verticalSpringSpeed * springDamp * Time.fixedDeltaTime;
+        float damp = -verticalSpringSpeed * springDamp;
 
         move.rb.linearVelocity += Vector3.up * (force + damp);
 
+        verticalSpringSpeed += (force + damp);
+
         // Draw debug lines
-        //gm.DebugLine("Feet Damp", Color.red, Vector3.up * 50 * damp);
-        //gm.DebugLine("Feet Force", Color.yellow, Vector3.up * 50 * force);
+        gm.DebugLine(false, "Feet speed", Color.white, Vector3.up * 0.3f * verticalSpringSpeed);
+        gm.DebugLine(false, "Feet Damp", Color.red, Vector3.up * 0.3f * damp);
+        gm.DebugLine(false, "Feet Force", Color.yellow, Vector3.up * 0.3f * force);
     }
 
     public void Slide()

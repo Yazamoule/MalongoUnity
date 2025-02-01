@@ -94,6 +94,17 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        gm.DebugLine(false, "OverrideVerticalAxis Velocity", Color.magenta, feet.OverrideVerticalAxis(rb.linearVelocity, true) * 0.5f);
+
+        gm.DebugLine(false, "spring Velocity", Color.red, feet.verticalSpringSpeed * Vector3.up * 0.5f);
+        gm.DebugLine(false, "Velocity - OverrideVerticalAxisVelocity ", Color.yellow, (rb.linearVelocity - feet.OverrideVerticalAxis(rb.linearVelocity, true)) * 0.5f);
+
+        gm.DebugLine(false, "spring Velocity + OverrideVerticalAxis", Color.blue, ((feet.verticalSpringSpeed * Vector3.up) + feet.OverrideVerticalAxis(rb.linearVelocity, true)) * 0.5f);
+        gm.DebugLine(false, "Velocity", Color.green, rb.linearVelocity * 0.5f);
+
+        gm.DebugLine(false, "wishDir", Color.magenta, wishDir);
+        gm.DebugLine(false, "Velocity", Color.blue, rb.linearVelocity * 0.3f);
+
         //read the Input
         inputTranslation = moveAction.ReadValue<Vector2>().normalized;
         
@@ -103,14 +114,15 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         wishDir = feet.RotateToLocalWorld(new Vector3(inputTranslation.x, 0, inputTranslation.y), false);
 
-        gm.DebugLine(false, "wishDir", Color.magenta, wishDir);
-        gm.DebugLine(false, "Velocity", Color.blue, rb.linearVelocity * 0.3f);
+
 
         feet.CustomUpdate();
         coreMove.Update();
         specialMove.Update();
+
     }
 
     void Look()

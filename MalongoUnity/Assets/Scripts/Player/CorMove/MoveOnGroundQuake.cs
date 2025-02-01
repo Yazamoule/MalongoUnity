@@ -8,8 +8,6 @@ public class MoveOnGroundQuake : CoreMoveState
     [SerializeField] float speedMax = 100;
     [SerializeField] float accelMax = 10;
 
-    Vector3 velocity = Vector3.zero;
-
     [SerializeField] float frictionCap = 20;
     [SerializeField] float friction = 1f;
 
@@ -32,6 +30,9 @@ public class MoveOnGroundQuake : CoreMoveState
 
             bool Condition()
             {
+                if (to == move.coreMoveEnum)
+                    return false;
+
                 return true;
             }
 
@@ -57,7 +58,7 @@ public class MoveOnGroundQuake : CoreMoveState
 
 
 
-        velocity = feet.OverrideVerticalAxis(move.rb.linearVelocity, true) - Vector3.up * feet.verticalSpringSpeed;
+        
 
 
         Decelerate();
@@ -66,6 +67,8 @@ public class MoveOnGroundQuake : CoreMoveState
 
     private void Accelerate()
     {
+        Vector3 velocity = move.rb.linearVelocity - Vector3.up * feet.verticalSpringSpeed;
+
         //scale wishDir so you can calculate current speed
         Vector3 wishVel = (feet.groundRQuat * move.wishDir) * speedMax;
 
@@ -84,30 +87,35 @@ public class MoveOnGroundQuake : CoreMoveState
 
         move.rb.linearVelocity += addSpeedVector;
 
-        gm.DebugLine(false, "GroundAccel", Color.green, addSpeedVector * 3f);
+        gm.DebugLine(true, "GroundAccel", Color.green, addSpeedVector * 3f);
     }
 
     private void Decelerate()
     {
+        Vector3 velocity = move.rb.linearVelocity - Vector3.up * feet.verticalSpringSpeed;
+
         float sqrSpeed = velocity.sqrMagnitude;
 
-        if (sqrSpeed == 0)
-            return;
+        //if (sqrSpeed < 0.01)
+        //    return;
 
         //dynamic friction and static friction, 2 in 1 good.
         //calculate the friction on a higher value if you go too slow
-        float capedHSpeed = sqrSpeed < frictionCap * frictionCap ? frictionCap : Mathf.Sqrt(sqrSpeed);
+        //float capedHSpeed = sqrSpeed < frictionCap * frictionCap ? frictionCap : Mathf.Sqrt(sqrSpeed);
+
+        gm.DebugLine(true, "capedHSpeed", Color.blue, velocity * 0.3f);
+
 
         //attention complicate try to think
-        Vector3 frictionVector = (move.rb.linearVelocity - Vector3.up * feet.verticalSpringSpeed).normalized * capedHSpeed * -friction * Time.fixedDeltaTime;
+        Vector3 frictionVector = velocity.normalized * Mathf.Sqrt(sqrSpeed) * -friction;
 
         //static friction wen the friciton is to strong just stop
-        if ((frictionVector.sqrMagnitude > sqrSpeed))
-            frictionVector = -velocity;
+        //if ((frictionVector.sqrMagnitude > sqrSpeed))
+        //    frictionVector = - feet.OverrideVerticalAxis(move.rb.linearVelocity, false, 0);
      
         move.rb.linearVelocity += frictionVector;
 
-        gm.DebugLine(false, "friction", Color.cyan, frictionVector * 3f);
+        gm.DebugLine(true, "friction", Color.cyan, frictionVector * 3f);
     }
 
 

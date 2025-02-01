@@ -27,6 +27,9 @@ public class MoveInAirQuake : CoreMoveState
 
             bool Condition()
             {
+                if (to == move.coreMoveEnum)
+                    return false;
+
                 return true;
             }
 

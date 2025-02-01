@@ -187,10 +187,7 @@ public class DebugCustom : MonoBehaviour
         {
             RayCustom ray = pair.Value;
 
-            if (drawRay && cooldownDrawRayOk)
-            {
-                UpdateVectorWorld(ray);
-            }
+  
 
             if (drawSideView)
                 UpdateUiSideView(ray);
@@ -198,7 +195,12 @@ public class DebugCustom : MonoBehaviour
             if (drawTopView)
                 UpdateUiTopView(ray);
 
-            ray.updatedThisFrame = false;
+            if (drawRay && cooldownDrawRayOk)
+            {
+                UpdateVectorWorld(ray);
+                ray.updatedThisFrame = false;
+            }
+
         }
     }
 

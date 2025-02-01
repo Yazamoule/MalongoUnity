@@ -20,10 +20,10 @@ public class Transition<TEnum> where TEnum : Enum
 
 
         if (_fromCore != null)
-        fromCor = new HashSet<CoreEnum>(_fromCore);
+            fromCor = new HashSet<CoreEnum>(_fromCore);
 
         if (_fromSpecial != null)
-        fromSpecial = new HashSet<SpecialEnum>(_fromSpecial);
+            fromSpecial = new HashSet<SpecialEnum>(_fromSpecial);
 
         if (_fromFeet != null)
             fromFeet = new HashSet<FeetEnum>(_fromFeet);
@@ -40,7 +40,7 @@ public class Transition<TEnum> where TEnum : Enum
     {
         if (!(fromCor == null || fromCor.Contains(move.coreMoveEnum)))
             return false;
-        
+
         if (!(fromSpecial == null || fromSpecial.Contains(move.specialMoveEnum)))
             return false;
 
