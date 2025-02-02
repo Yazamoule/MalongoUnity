@@ -199,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 5431018340431264679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.98, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -485,7 +485,7 @@ Transform:
   m_GameObject: {fileID: 7588307746041993977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.328, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -563,17 +563,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundNormal: {x: 0, y: 1, z: 2.220446e-17}
   groundRQuat: {x: 0, y: 0, z: 0, w: 1}
-  currentStep: {x: 136.72543, y: -1.8376551e-15, z: 82.76063}
+  currentStep: {x: 0.29993054, y: 1.5942804e-16, z: -7.180001}
   maxSlopeAngle: 45
-  springForce: 15.2
-  springDamp: -1.94
-  groundDist: 0.5636573
-  verticalSpringSpeed: -1.3853794
+  springForce: 22.5
+  springDamp: 0.09
+  groundDist: 1.865712
+  verticalSpringSpeed: 0
   start: {fileID: 5858622045816731143}
   end: {fileID: 5182391355384632846}
   rayLayermask:
     serializedVersion: 2
     m_Bits: 1
+  forceOffGround: 0
 --- !u!114 &7890012173376881678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,10 +628,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateEnum: 1
-  speedMax: 10.54
-  accelMax: 27.8
+  speedMax: 10
+  accelMax: 60
   frictionCap: 3
-  friction: 3
+  friction: 0.08
 --- !u!114 &7791937478416290886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,7 +646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateEnum: 0
   speedMax: 10
-  accelMax: 30
+  accelMax: 60
 --- !u!114 &807534156643681126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +673,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateEnum: 0
+  bufferTime: 0.5
+  forceOffGroundTime: 0.5
   force: 6.04
 --- !u!54 &5773208007185893835
 Rigidbody:

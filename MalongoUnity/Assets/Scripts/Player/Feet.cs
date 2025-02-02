@@ -27,6 +27,8 @@ public class Feet : MonoBehaviour
     float length = 0f;
     [SerializeField] LayerMask rayLayermask;
 
+    [SerializeField] public bool forceOffGround = false;
+
 
     private void Awake()
     {
@@ -55,6 +57,16 @@ public class Feet : MonoBehaviour
         move.backFeetEnum = move.feetEnum;
 
         lastGroundDist = groundDist;
+
+        if (forceOffGround)
+        {
+            groundNormal = Vector3.up;
+            groundRQuat = Quaternion.identity;
+            groundDist = 1000f;
+            verticalSpringSpeed = 0f;
+            move.feetEnum = FeetEnum.OffGround;
+            return;
+        }
 
         Ray ray = new Ray(start.position, Vector3.down);
         RaycastHit hit = new RaycastHit();
@@ -94,8 +106,6 @@ public class Feet : MonoBehaviour
             verticalSpringSpeed = 0f;
             move.feetEnum = FeetEnum.OffGround;
         }
-
-
     }
 
 

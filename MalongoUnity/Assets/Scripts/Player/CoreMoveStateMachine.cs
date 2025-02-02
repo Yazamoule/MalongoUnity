@@ -57,7 +57,7 @@ public class CoreMoveStateMachine
         currentState.Execute();
     }
 
-    public void Update()
+    public void CustomUpdate()
     {
         move.backCoreEnum = move.coreMoveEnum;
 

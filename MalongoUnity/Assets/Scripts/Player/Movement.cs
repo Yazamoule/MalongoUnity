@@ -120,8 +120,8 @@ public class Movement : MonoBehaviour
 
 
         feet.CustomUpdate();
-        coreMove.Update();
-        specialMove.Update();
+        coreMove.CustomUpdate();
+        specialMove.CustomUpdate();
 
     }
 

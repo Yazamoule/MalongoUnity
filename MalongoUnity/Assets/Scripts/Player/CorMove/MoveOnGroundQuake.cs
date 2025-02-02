@@ -87,7 +87,7 @@ public class MoveOnGroundQuake : CoreMoveState
 
         move.rb.linearVelocity += addSpeedVector;
 
-        gm.DebugLine(true, "GroundAccel", Color.green, addSpeedVector * 3f);
+        gm.DebugLine(false, "GroundAccel", Color.green, addSpeedVector * 3f);
     }
 
     private void Decelerate()
@@ -103,10 +103,7 @@ public class MoveOnGroundQuake : CoreMoveState
         //calculate the friction on a higher value if you go too slow
         float capedHSpeed = sqrSpeed < frictionCap * frictionCap ? frictionCap : Mathf.Sqrt(sqrSpeed);
 
-        gm.DebugLine(true, "capedHSpeed", Color.blue, velocity * 0.3f);
 
-
-        //attention complicate try to think
         Vector3 frictionVector = velocity.normalized * capedHSpeed * -friction * Time.fixedDeltaTime * 60;
 
         //static friction wen the friciton is to strong just stop
@@ -115,7 +112,8 @@ public class MoveOnGroundQuake : CoreMoveState
 
         move.rb.linearVelocity += frictionVector;
 
-        gm.DebugLine(true, "friction", Color.cyan, frictionVector * 3f);
+        gm.DebugLine(false, "capedHSpeed", Color.blue, velocity * 0.3f);
+        gm.DebugLine(false, "friction", Color.cyan, frictionVector * 3f);
     }
 
 

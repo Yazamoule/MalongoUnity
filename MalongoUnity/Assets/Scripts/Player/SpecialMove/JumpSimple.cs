@@ -1,10 +1,17 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Movement;
 
 public class JumpSimple : SpecialMoveState
 {
-    bool iWantToJump = false;
+    float bufferClock = 0f;
+    [SerializeField] float bufferTime = 0.5f;
+
+
+    float forceOffGroundClock = 0f;
+    [SerializeField] float forceOffGroundTime = 0.5f;
+
     [SerializeField] float force = 100;
 
     public override void Init()
@@ -17,6 +24,7 @@ public class JumpSimple : SpecialMoveState
 
         #region Transitions
         {//enter jump from any
+            FeetEnum[] fromFeet = { FeetEnum.OnGround };
             CoreEnum[] fromCore = null;
             SpecialEnum[] fromSpecial = null;
             SpecialEnum to = SpecialEnum.Jump;
@@ -24,18 +32,20 @@ public class JumpSimple : SpecialMoveState
 
             bool Condition()
             {
-                if (move.feetEnum == FeetEnum.OnGround && iWantToJump)
-                     return true;
+                if (to == move.specialMoveEnum)
+                    return false;
 
-                //reset i want to jump
-                iWantToJump = false;
+                if (bufferClock > 0)
+                    return true;
+
                 return false;
             }
 
-            Transition<SpecialEnum> transition = new Transition<SpecialEnum>(to, priority, Condition, null, fromCore, fromSpecial);
+            Transition<SpecialEnum> transition = new Transition<SpecialEnum>(to, priority, Condition, fromFeet, fromCore, fromSpecial);
             stateMachine.transitions.Add(transition);
         }
         {   //Exit Jump from any
+            FeetEnum[] fromFeet = null;
             CoreEnum[] fromCore = null;
             SpecialEnum[] fromSpecial = { SpecialEnum.Jump };
             SpecialEnum to = SpecialEnum.None;
@@ -47,9 +57,10 @@ public class JumpSimple : SpecialMoveState
                     return false;
 
                 return true;
+
             }
 
-            Transition<SpecialEnum> transition = new Transition<SpecialEnum>(to, priority, Condition, null, fromCore, fromSpecial);
+            Transition<SpecialEnum> transition = new Transition<SpecialEnum>(to, priority, Condition, fromFeet, fromCore, fromSpecial);
             stateMachine.transitions.Add(transition);
         }
         #endregion
@@ -61,30 +72,48 @@ public class JumpSimple : SpecialMoveState
     public override void Enter()
     {
         base.Enter();
-        move.rb.linearVelocity += Vector3.up * force;
+        move.rb.linearVelocity = feet.OverrideVerticalAxis(move.rb.linearVelocity, false, force);
+
+        bufferClock = 0f;
+
+        feet.forceOffGround = true;
+        forceOffGroundClock = forceOffGroundTime;
     }
 
     public override void Execute()
     {
         base.Execute();
+
+
     }
 
     public override void Exit()
     {
-        //reset i want to jump
-        iWantToJump = false;
 
 
         base.Exit();
     }
 
-    private void Update()
+
+    private void FixedUpdate()
     {
+        if (bufferClock > 0f)
+            bufferClock -= Time.fixedDeltaTime;
+
+
+        if (forceOffGroundClock > 0f)
+            forceOffGroundClock -= Time.fixedDeltaTime;
+        else if (forceOffGroundClock < 0f)
+        {
+            forceOffGroundClock = 0f;
+            feet.forceOffGround = false;
+        }
+
 
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        iWantToJump = true;
+        bufferClock = bufferTime;
     }
 }

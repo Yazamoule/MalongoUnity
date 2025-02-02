@@ -53,10 +53,9 @@ public class SpecialMoveStateMachine
                 return;
             }
         }
-        currentState.Execute();
     }
 
-    public void Update()
+    public void CustomUpdate()
     {
         move.backSpecialMoveEnum = move.specialMoveEnum;
 
