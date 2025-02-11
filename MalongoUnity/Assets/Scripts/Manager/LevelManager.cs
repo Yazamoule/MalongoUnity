@@ -27,6 +27,8 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Pause pause = null;
 
     [HideInInspector] public Player player = null;
+
+    [field: SerializeField] public LevelAudioEvents auEvents;
     #endregion
 
 

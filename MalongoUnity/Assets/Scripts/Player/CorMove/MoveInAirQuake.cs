@@ -3,10 +3,14 @@ using static Movement;
 
 public class MoveInAirQuake : CoreMoveState
 {
-    [SerializeField] float speedMax = 100;
-    [SerializeField] float accelMax = 10;
+    [SerializeField] float speedMax = 320;
+    [SerializeField] float accelMax = 0.7f * 60f;
+
 
     Vector3 velocity = Vector3.zero;
+
+
+ 
 
 
     public override void Init()
@@ -75,26 +79,7 @@ public class MoveInAirQuake : CoreMoveState
         gm.DebugLine(false, "AirMoveAccel", Color.green, addSpeedVector * 3f);
     }
 
-    //private void Decelerate()
-    //{
-    //    float speed = move.rb.linearVelocity.magnitude;
 
-    //    if (speed == 0)
-    //        return;
-
-    //    //dynamic friction and static friction, 2 in 1 good.
-    //    //calculate the friction on a higher value if you go too slow
-    //    float capedHSpeed = speed < frictionCap ? frictionCap : speed;
-
-    //    //attention complicate try to think
-    //    Vector3 frictionVector = feet.OverrideVerticalAxis(move.rb.linearVelocity.normalized, true) * capedHSpeed * -friction * Time.fixedDeltaTime;
-
-
-    //    if ((frictionVector.SquaredLength() > move.rb.linearVelocity.SquaredLength()))
-    //        return -_nextVelocity;
-
-    //    move.rb.linearVelocity += frictionVector;
-    //}
 
 
     public override void Exit()

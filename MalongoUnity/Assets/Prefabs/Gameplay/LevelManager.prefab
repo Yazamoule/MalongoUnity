@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3291953553834303940}
   - component: {fileID: 6075108226220294145}
   - component: {fileID: 2653172224345740610}
+  - component: {fileID: 7486768707232357250}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   endGameScreen: {fileID: 0}
   hud: {fileID: 0}
   pause: {fileID: 0}
+  player: {fileID: 0}
+  auEvents: {fileID: 0}
 --- !u!114 &2653172224345740610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,3 +65,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winingScore: 50
+--- !u!114 &7486768707232357250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266222987842975296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2910d4111666bc64c9763b5678cc9ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <playerFootsteps>k__BackingField:
+    Guid:
+      Data1: 1395622895
+      Data2: 1202296815
+      Data3: 1926603694
+      Data4: -1235546519
+    Path: event:/New Event
+  <coinCollected>k__BackingField:
+    Guid:
+      Data1: 1395622895
+      Data2: 1202296815
+      Data3: 1926603694
+      Data4: -1235546519
+    Path: event:/New Event
+  <coinIdle>k__BackingField:
+    Guid:
+      Data1: 1395622895
+      Data2: 1202296815
+      Data3: 1926603694
+      Data4: -1235546519
+    Path: event:/New Event

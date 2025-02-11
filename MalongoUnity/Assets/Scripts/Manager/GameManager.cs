@@ -37,9 +37,14 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public LeaderboardManager leaderboardManager = null;
 
-    [HideInInspector] public SaveLoad saveLoad;
+    [HideInInspector] public SaveLoad saveLoad = null;
 
-    [HideInInspector] public DebugCustom debug;
+    [HideInInspector] public DebugCustom debug = null;
+
+    [HideInInspector] public AudioManager aum = null;
+
+    [HideInInspector] public GlobalAudioEvents auEvents = null;
+
     #endregion
 
     [SerializeField] GameObject inputGameObject = null;

@@ -5,12 +5,23 @@ using static Movement;
 
 public class MoveOnGroundQuake : CoreMoveState
 {
-    [SerializeField] float speedMax = 100;
+    [SerializeField] float speedMax = 320;
     [SerializeField] float accelMax = 10;
 
     [SerializeField] float frictionCap = 20;
-    [SerializeField] float friction = 1f;
+    [SerializeField] float friction = 4f;
 
+    //cvar_t sv_maxvelocity = { "sv_maxvelocity", "2000" };
+
+    //cvar_t sv_gravity = { "sv_gravity", "800" };
+    //cvar_t sv_stopspeed = { "sv_stopspeed", "100" };
+    //cvar_t sv_maxspeed = { "sv_maxspeed", "320" };
+    //cvar_t sv_spectatormaxspeed = { "sv_spectatormaxspeed", "500" };
+    //cvar_t sv_accelerate = { "sv_accelerate", "10" };
+    //cvar_t sv_airaccelerate = { "sv_airaccelerate", "0.7" };
+    //cvar_t sv_wateraccelerate = { "sv_wateraccelerate", "10" };
+    //cvar_t sv_friction = { "sv_friction", "4" };
+    //cvar_t sv_waterfriction = { "sv_waterfriction", "4" };
 
     public override void Init()
     {

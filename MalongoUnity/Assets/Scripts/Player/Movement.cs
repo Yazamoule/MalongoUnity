@@ -54,7 +54,6 @@ public class Movement : MonoBehaviour
 
     InputAction moveAction = null;
     [HideInInspector] public Vector2 inputTranslation = Vector2.zero;
-    InputAction lookAction = null;
     [HideInInspector] public Vector2 inputRotation = Vector2.zero;
 
     [HideInInspector] public Vector3 wishDir = Vector3.zero;
