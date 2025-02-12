@@ -14,7 +14,7 @@ public class SoundMenu : MonoBehaviour
     private void Start()
     {
         gm = GameManager.Instance;
-      
+
         masterVolumeSlider.value = gm.option.volumeMaster;
         musicVolumeSlider.value = gm.option.volumeMusic;
         sfxVolumeSlider.value = gm.option.volumeSFX;
@@ -26,6 +26,7 @@ public class SoundMenu : MonoBehaviour
         musicVolumeSlider.onValueChanged.AddListener(delegate { OnVolumeSliderChanged("bus:/Ambience", ambienceVolumeSlider.value); });
         sfxVolumeSlider.onValueChanged.AddListener(delegate { OnVolumeSliderChanged("bus:/SFX", sfxVolumeSlider.value); });
 
+
     }
 
     // Event handler for when a volume slider is changed
@@ -33,5 +34,17 @@ public class SoundMenu : MonoBehaviour
     {
         FMOD.Studio.Bus bus = FMODUnity.RuntimeManager.GetBus(busPath);
         bus.setVolume(volume);
+
+
+    }
+
+    public void Save()
+    {
+        gm.option.volumeMaster = masterVolumeSlider.value;
+        gm.option.volumeMusic = musicVolumeSlider.value;
+        gm.option.volumeSFX = sfxVolumeSlider.value;
+        gm.option.volumeAmbience = ambienceVolumeSlider.value;
+
+        gm.saveLoad.SaveOption();
     }
 }

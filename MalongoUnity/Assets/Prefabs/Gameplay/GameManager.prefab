@@ -188,8 +188,6 @@ GameObject:
   - component: {fileID: 18810903221069383}
   - component: {fileID: 5269380545332513785}
   - component: {fileID: 5827111107373494663}
-  - component: {fileID: 3992860579000597875}
-  - component: {fileID: 1302340091907248314}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -228,8 +226,6 @@ MonoBehaviour:
   input: {fileID: 0}
   leaderboardManager: {fileID: 0}
   debug: {fileID: 0}
-  aum: {fileID: 0}
-  auEvents: {fileID: 0}
   inputGameObject: {fileID: 6292898105062263674, guid: 1f591e32a1814d249bbb47e5c2e04040, type: 3}
   blackImage: {fileID: 5401916652159906600}
   timeOfFadeOut: 2
@@ -246,45 +242,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4674b9ef73f3bff40810f982cf28c853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3992860579000597875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5851725858936388335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344dec00c8ad778419ec1d90744a860c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterVolume: 0.5
-  musicVolume: 0.5
-  ambienceVolume: 0.5
-  SFXVolume: 0.5
---- !u!114 &1302340091907248314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5851725858936388335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264182f40e8587840868bd1708a48791, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <ambience>k__BackingField:
-    Guid:
-      Data1: 1395622895
-      Data2: 1202296815
-      Data3: 1926603694
-      Data4: -1235546519
-    Path: event:/New Event
-  <music>k__BackingField:
-    Guid:
-      Data1: 1395622895
-      Data2: 1202296815
-      Data3: 1926603694
-      Data4: -1235546519
-    Path: event:/New Event
