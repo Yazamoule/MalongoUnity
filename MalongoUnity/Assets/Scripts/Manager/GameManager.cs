@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using FMODUnity;
 using Unity.VisualScripting;
 
 
@@ -40,11 +39,6 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public SaveLoad saveLoad = null;
 
     [HideInInspector] public DebugCustom debug = null;
-
-    [HideInInspector] public AudioManager aum = null;
-
-    [HideInInspector] public GlobalAudioEvents auEvents = null;
-
     #endregion
 
     [SerializeField] GameObject inputGameObject = null;
@@ -72,7 +66,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        input = GameObject.FindFirstObjectByType<PlayerInput>();
+        input = FindFirstObjectByType<PlayerInput>();
+
+        saveLoad.LoadOption();
+        saveLoad.LoadInput();
+
+        FMODUnity.RuntimeManager.GetBus("bus:/").setVolume(option.volumeMaster);
+        FMODUnity.RuntimeManager.GetBus("bus:/Music").setVolume(option.volumeMusic);
+        FMODUnity.RuntimeManager.GetBus("bus:/Ambience").setVolume(option.volumeAmbience);
+        FMODUnity.RuntimeManager.GetBus("bus:/SFX").setVolume(option.volumeSFX);
     }
 
     private void OnDestroy()
@@ -85,6 +87,8 @@ public class GameManager : MonoBehaviour
 
     private void HandleSceneChange()
     {
+        FMODUnity.RuntimeManager.GetBus("bus:/Ambience").stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        FMODUnity.RuntimeManager.GetBus("bus:/SFX").stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     public void StopTime(bool _stopTime)
@@ -157,7 +161,7 @@ public class GameManager : MonoBehaviour
                 {
                     masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
                 }
-                catch (BusNotFoundException)
+                catch (FMODUnity.BusNotFoundException)
                 {
                     masterBus = default; // Set to an invalid bus
                 }

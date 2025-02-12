@@ -3,26 +3,20 @@ using FMODUnity;
 
 public class TestForFmodOneShotSound : MonoBehaviour
 {
-
-    private StudioEventEmitter emitter;
-
-    LevelAudioEvents levelAudioEvents;
+    [field: SerializeField] public EventReference soundForOnTriggerEnter; 
 
     private void Start()
     {
-        levelAudioEvents = LevelManager.Instance.auEvents;
-
-        emitter = GameManager.Instance.aum.InitializeEventEmitter(levelAudioEvents.coinIdle, this.gameObject);
-        emitter.Play();
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.Instance.aum.PlayOneShot(levelAudioEvents.coinCollected, this.transform.position);
+        RuntimeManager.PlayOneShotAttached(soundForOnTriggerEnter, gameObject);
     }
 
     private void OnDestroy()
     {
-        emitter.Stop();
+        
     }
 }

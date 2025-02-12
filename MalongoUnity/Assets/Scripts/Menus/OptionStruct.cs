@@ -11,4 +11,9 @@ public struct OptionStruct
 
     public float mouseSensitivity;
 
+    //Sound
+    public float volumeMaster;
+    public float volumeMusic;
+    public float volumeAmbience;
+    public float volumeSFX;
 }

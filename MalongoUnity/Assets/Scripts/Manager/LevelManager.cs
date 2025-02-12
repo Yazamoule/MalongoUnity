@@ -27,8 +27,6 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Pause pause = null;
 
     [HideInInspector] public Player player = null;
-
-    [field: SerializeField] public LevelAudioEvents auEvents;
     #endregion
 
 
@@ -52,12 +50,10 @@ public class LevelManager : MonoBehaviour
     private void OnDestroy()
     {
         gm.OnSceneChange -= HandleSceneChange;
-
     }
 
     private void HandleSceneChange()
     {
-
     }
 
     public void DrawVector(Vector3 _vector, float _scale, Color _color)
