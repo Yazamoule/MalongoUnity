@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{768875b6-a8ea-4312-b1c5-3662a6c2e0e8}">
+		<property name="assetPath">
+			<value>PC Computer - Half-Life 2 &amp; Episodes - Buttons Doors &amp; Platforms/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b35fa8d7-e8b7-4218-bcb9-156a1ba18831}</destination>
+		</relationship>
+	</object>
+</objects>

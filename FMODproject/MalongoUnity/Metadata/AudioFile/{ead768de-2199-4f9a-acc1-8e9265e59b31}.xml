@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{ead768de-2199-4f9a-acc1-8e9265e59b31}">
+		<property name="assetPath">
+			<value>Music/OKKOTO - Pretty [TSA].mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>391.81061224489798</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b35fa8d7-e8b7-4218-bcb9-156a1ba18831}</destination>
+		</relationship>
+	</object>
+</objects>

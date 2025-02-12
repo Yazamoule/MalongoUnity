@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{33b0d4cd-b870-4ed9-85ee-9fa9cd151ca9}">
+		<property name="assetPath">
+			<value>PC Computer - Half-Life 2 &amp; Episodes - Buttons Doors &amp; Platforms/buttons_doors_plats/railstop1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>11.0249996</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.5566439909297052</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b35fa8d7-e8b7-4218-bcb9-156a1ba18831}</destination>
+		</relationship>
+	</object>
+</objects>

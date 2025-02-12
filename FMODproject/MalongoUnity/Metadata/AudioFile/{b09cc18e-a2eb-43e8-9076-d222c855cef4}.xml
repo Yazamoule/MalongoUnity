@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{b09cc18e-a2eb-43e8-9076-d222c855cef4}">
+		<property name="assetPath">
+			<value>PC Computer - Half-Life 2 &amp; Episodes - Buttons Doors &amp; Platforms/buttons_doors_plats/latchlocked2.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.54356009070294786</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b35fa8d7-e8b7-4218-bcb9-156a1ba18831}</destination>
+		</relationship>
+	</object>
+</objects>

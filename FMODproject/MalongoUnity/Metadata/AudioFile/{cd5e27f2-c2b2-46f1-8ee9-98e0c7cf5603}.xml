@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{cd5e27f2-c2b2-46f1-8ee9-98e0c7cf5603}">
+		<property name="assetPath">
+			<value>PC Computer - Half-Life 2 &amp; Episodes - Buttons Doors &amp; Platforms/buttons_doors_plats/handle_pushbar_open1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>22.0499992</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.0333786848072561</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b35fa8d7-e8b7-4218-bcb9-156a1ba18831}</destination>
+		</relationship>
+	</object>
+</objects>

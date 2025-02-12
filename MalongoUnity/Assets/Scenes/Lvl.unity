@@ -1813,6 +1813,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693033181}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &908211443 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7911532163730066466, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+  m_PrefabInstance: {fileID: 8570884979528283451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &921905474
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,6 +3030,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <music>k__BackingField.Path
+      value: event:/Music/MusicLvl
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <ambience>k__BackingField.Path
+      value: event:/SFX/UI/combineButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <music>k__BackingField.Guid.Data1
+      value: 1709379874
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <music>k__BackingField.Guid.Data2
+      value: 1307952477
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <music>k__BackingField.Guid.Data3
+      value: -8898418
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <music>k__BackingField.Guid.Data4
+      value: 97335787
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <ambience>k__BackingField.Guid.Data1
+      value: 288783006
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <ambience>k__BackingField.Guid.Data2
+      value: 1254451637
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <ambience>k__BackingField.Guid.Data3
+      value: -583193210
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302340091907248314, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
+      propertyPath: <ambience>k__BackingField.Guid.Data4
+      value: 51024427
+      objectReference: {fileID: 0}
     - target: {fileID: 5851725858936388335, guid: 75601635a9c26504ea28bbc088b37459, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -3958,6 +4003,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2033612804}
   - component: {fileID: 2033612803}
+  - component: {fileID: 2033612805}
   - component: {fileID: 2033612802}
   - component: {fileID: 2033612801}
   - component: {fileID: 2033612800}
@@ -4069,6 +4115,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2033612805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033612799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -359255882
+      Data2: 1089033965
+      Data3: -2309199
+      Data4: 1333431083
+    Path: event:/SFX/CoinIdle
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 10.5
 --- !u!1 &2062484119
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,6 +4608,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinIdle>k__BackingField.Path
+      value: event:/SFX/CoinIdle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinCollected>k__BackingField.Path
+      value: event:/SFX/UI/combineButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinIdle>k__BackingField.Guid.Data1
+      value: -359255882
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinIdle>k__BackingField.Guid.Data2
+      value: 1089033965
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinIdle>k__BackingField.Guid.Data3
+      value: -2309199
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinIdle>k__BackingField.Guid.Data4
+      value: 1333431083
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <playerFootsteps>k__BackingField.Path
+      value: event:/SFX/UI/combineButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinCollected>k__BackingField.Guid.Data1
+      value: 288783006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinCollected>k__BackingField.Guid.Data2
+      value: 1254451637
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinCollected>k__BackingField.Guid.Data3
+      value: -583193210
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <coinCollected>k__BackingField.Guid.Data4
+      value: 51024427
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <playerFootsteps>k__BackingField.Guid.Data1
+      value: 288783006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <playerFootsteps>k__BackingField.Guid.Data2
+      value: 1254451637
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <playerFootsteps>k__BackingField.Guid.Data3
+      value: -583193210
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486768707232357250, guid: 513d9521a0032c544bb45811f72ca051, type: 3}
+      propertyPath: <playerFootsteps>k__BackingField.Guid.Data4
+      value: 51024427
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4544,6 +4681,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5669210599587026440, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
+      propertyPath: attenuationObject
+      value: 
+      objectReference: {fileID: 908211443}
     - target: {fileID: 6976593151785016782, guid: 6780df75b16ed5a4eb360589b15381c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3
